@@ -1,3 +1,10 @@
 import './style.css';
+import nav, { createNavigation } from './displayNavigation.js';
 
-console.log("Hello World");
+function display() {
+  document.body.appendChild(nav);
+
+  createNavigation();
+}
+
+display();

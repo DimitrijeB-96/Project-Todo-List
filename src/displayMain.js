@@ -1,0 +1,1 @@
+const mainSection = document.createElement('div');

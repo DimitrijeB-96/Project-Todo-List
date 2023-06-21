@@ -58,8 +58,52 @@ function projectNavSection() {
   projectNavDiv.append(projectSectionText, addProjectBtn);
 }
 
+function createNewProject() {
+  const addProjectBtn = document.querySelector('.add-project-btn');
+  const projectNavDiv = document.querySelector('.project-nav-div');
+
+  if (document.querySelector('.new-projects-div') === null) {
+    const newProjectDiv = document.createElement('div');
+    newProjectDiv.classList.add('new-projects-div');
+    newProjectDiv.style.display = 'flex';
+
+    const btnsDiv = document.createElement('div');
+    btnsDiv.classList.add('new-projects-btns-div');
+  
+    const newProjectInput = document.createElement('input');
+    newProjectInput.classList.add('new-project-input');
+    newProjectInput.focus();
+    const cancelProjectBtn = document.createElement('button');
+    cancelProjectBtn.classList.add('cancel-btn');
+    cancelProjectBtn.textContent = 'Cancel';
+    const saveProjectBtn = document.createElement('button');
+    saveProjectBtn.classList.add('save-btn');
+    saveProjectBtn.textContent = 'Save';
+  
+    saveProjectBtn.addEventListener('click', saveProject);
+  
+    cancelProjectBtn.addEventListener('click', cancelProject);
+  
+    projectNavDiv.insertBefore(newProjectDiv, addProjectBtn);
+    btnsDiv.append(cancelProjectBtn, saveProjectBtn);
+    newProjectDiv.append(newProjectInput, btnsDiv);
+  }
+}
+
+function cancelProject() {
+  document.querySelector('.new-project-input').remove();
+  document.querySelector('.cancel-btn').remove();
+  document.querySelector('.save-btn').remove();
+
+  document.querySelector('.new-projects-div').remove();
+}
+
+function saveProject() {
+  console.log('saved');
+}
+
 export default navSection;
 
 export {
-
+  createNewProject,
 };

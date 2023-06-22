@@ -263,6 +263,131 @@ body {
   box-shadow: none;
 }
 
+.menu-task-div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin: 10% auto;
+  width: 450px;
+  height: 600px;
+  background: var(--slate-midlight);
+  border-radius: 20px;
+  box-shadow: 0 0 10px -2px var(--slate-dark);
+  z-index: 100;
+}
+
+.top-div-task-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 15%;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: var(--green);
+  padding: 10px 10px;
+}
+
+.top-div-task-menu h2 {
+  font-size: 30px;
+  color: var(--slate-light);
+}
+
+.task-form {
+  width: 100%;
+  height: 85%;
+}
+
+.task-form > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 20%;
+  padding: 10px;
+}
+
+.task-form > div label{
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.task-form > div input {
+  height: 40px;
+  font-size: 28px;
+  padding-left: 5px;
+
+}
+
+.task-form > div textarea {
+  height: 90%;
+  resize: none;
+  font-size: 24px;
+  padding-left: 5px;
+}
+
+.task-form > div input[type="date"] {
+  font-size: 24px;
+  margin-left: 10px;
+  margin-top: -5px;
+}
+
+.task-form > div input[type="checkbox"] {
+  margin-left: 10px;
+  margin-top: -5px;
+}
+
+.task-form > div button {
+  
+}
+
+.task-form > div:nth-of-type(2) {
+  height: 35%;
+}
+
+.task-form > div:last-of-type,
+.task-form > div:nth-of-type(3),
+.task-form > div:nth-of-type(4) {
+  flex-direction: row;
+}
+
+.task-form > div:nth-of-type(3),
+.task-form > div:nth-of-type(4) {
+  justify-content: start;
+}
+
+.task-form > div:nth-of-type(3) {
+  margin-top: 10px;
+  height: 15%;
+}
+
+.task-form > div:nth-of-type(4) {
+  height: 10%;
+}
+
+.task-form > div:last-of-type {
+  height: 20%;
+}
+
+.task-form > div .cancel-btn,
+.task-form > div .save-btn {
+  width: 100px;
+  height: 45px;
+  font-size: 26px;
+}
+
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--slate-dark);
+  opacity: 0.5;
+  z-index: 50;
+}
+
 .footer-div {
   width: 80vw;
   height: 10vh;

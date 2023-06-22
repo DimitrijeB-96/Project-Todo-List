@@ -91,10 +91,13 @@ function createTaskForm() {
   const taskFromBtnsDiv = document.createElement('div');
   const taskFromBtnCancel = document.createElement('button');
   taskFromBtnCancel.textContent = 'Cancel';
-  taskFromBtnCancel.classList.add('cancel-btn');
+  taskFromBtnCancel.classList.add('cancel-btn-task');
   const taskFromBtnCreate = document.createElement('button');
   taskFromBtnCreate.textContent = 'Create';
-  taskFromBtnCreate.classList.add('save-btn');
+  taskFromBtnCreate.classList.add('create-btn-task');
+
+  taskFromBtnCancel.addEventListener('click', closeTaskWindow);
+  taskFromBtnCreate.addEventListener('click', createTask);
 
   taskFromTitleDiv.append(taskTitleLabel, taskTitleInput);
   taskFromDescriptionDiv.append(taskDescriptionLabel, taskDescriptionTextarea);
@@ -105,10 +108,22 @@ function createTaskForm() {
 }
 
 function background() {
-  const background = document.createElement('div');
-  background.classList.add('background');
+  const backgroundDiv = document.createElement('div');
+  backgroundDiv.classList.add('background');
 
-  document.body.appendChild(background);
+  document.body.appendChild(backgroundDiv);
+}
+
+function closeTaskWindow(e) {
+  e.preventDefault();
+  const menuTaskDiv = document.querySelector('.menu-task-div');
+  const backgroundDiv = document.querySelector('.background');
+  menuTaskDiv.remove();
+  backgroundDiv.remove();
+}
+
+function createTask(e) {
+  e.preventDefault();
 }
 
 function footerMainSection() {

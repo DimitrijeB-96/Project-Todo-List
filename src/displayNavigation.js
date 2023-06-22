@@ -1,3 +1,5 @@
+import { Project } from "./createProject";
+
 const navSection = document.createElement('div');
 navSection.classList.add('navigation-section');
 
@@ -51,11 +53,15 @@ function projectNavSection() {
   const projectSectionText = document.createElement('h2');
   projectSectionText.textContent = 'Projects';
 
+  const projectsSectionDiv = document.createElement('div');
+  projectsSectionDiv.classList.add('project-section-div');
+
+
   const addProjectBtn = document.createElement('button');
   addProjectBtn.classList.add('add-project-btn');
   addProjectBtn.textContent = 'Add Project';
 
-  projectNavDiv.append(projectSectionText, addProjectBtn);
+  projectNavDiv.append(projectSectionText, projectsSectionDiv, addProjectBtn);
 }
 
 function createNewProject() {
@@ -72,7 +78,7 @@ function createNewProject() {
   
     const newProjectInput = document.createElement('input');
     newProjectInput.classList.add('new-project-input');
-    newProjectInput.focus();
+    
     const cancelProjectBtn = document.createElement('button');
     cancelProjectBtn.classList.add('cancel-btn');
     cancelProjectBtn.textContent = 'Cancel';
@@ -99,7 +105,39 @@ function cancelProject() {
 }
 
 function saveProject() {
-  console.log('saved');
+  const newProjectInput = document.querySelector('.new-project-input');
+  const projectsSectionDiv = document.querySelector('.project-section-div');
+
+  if (newProjectInput.value !== '') {
+    const projectDiv = document.createElement('div');
+    projectDiv.classList.add('project-div');
+
+    const projectName = document.createElement('h3');
+    projectName.classList.add('project-name');
+
+    const deleteProjectBtn = document.createElement('button');
+    deleteProjectBtn.classList.add('delete-project-btn');
+    deleteProjectBtn.textContent = 'X';
+
+    deleteProjectBtn.addEventListener('click', deleteProject);
+
+    projectName.textContent = newProjectInput.value;
+    projectDiv.append(projectName, deleteProjectBtn);
+    projectsSectionDiv.append(projectDiv);
+    newProjectInput.value = '';
+    cancelProject();
+  } else {
+
+  }
+}
+
+function deleteProject() {
+  const projectDiv = document.querySelectorAll('.project-div');
+
+  projectDiv.forEach(project => project.addEventListener('click', () => {
+    project.remove();
+   })
+  );
 }
 
 export default navSection;

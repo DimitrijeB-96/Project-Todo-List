@@ -44,6 +44,10 @@ body {
   background: var(--slate-light);
 }
 
+button {
+  cursor: pointer;
+}
+
 .navigation-section {
   grid-area: nav;
   display: flex;
@@ -144,7 +148,6 @@ body {
 .new-projects-div {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 }
 
 .new-projects-btns-div {
@@ -173,8 +176,45 @@ body {
   border: 3px solid var(--green);
 }
 
+.project-section-div {
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.project-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.project-name {
+  font-size: 16px;
+  padding-top: 8px;
+  font-weight: 700;
+  list-style: none;
+  align-self: center;
+}
+
+.delete-project-btn {
+  background: none;
+  border: none;
+  height: 30px;
+  width: 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.delete-project-btn:hover {
+  background: var(--green);
+  border-radius: 8px;
+  color: var(--slate-light);
+}
+
 .cancel-btn,
-.save-btn {
+.save-btn,
+.cancel-btn-task,
+.create-btn-task {
   font-size: 18px;
   font-weight: 700;
   height: 32px;
@@ -184,11 +224,13 @@ body {
   color: var(--slate-light);
 }
 
-.cancel-btn {
+.cancel-btn,
+.cancel-btn-task {
   background: var(--red);
 }
 
-.save-btn {
+.save-btn,
+.create-btn-task {
   background: var(--green);
   margin-left: 10px;
 }
@@ -337,8 +379,10 @@ body {
   margin-top: -5px;
 }
 
-.task-form > div button {
-  
+.cancel-btn-task {
+  width: 100px;
+  height: 45px;
+  font-size: 26px;
 }
 
 .task-form > div:nth-of-type(2) {
@@ -369,13 +413,12 @@ body {
   height: 20%;
 }
 
-.task-form > div .cancel-btn,
-.task-form > div .save-btn {
+.cancel-btn-task,
+.create-btn-task {
   width: 100px;
   height: 45px;
   font-size: 26px;
 }
-
 
 .background {
   position: absolute;

@@ -10,20 +10,21 @@ export function createNavigation() {
 }
 
 function topNavSection() {
-  const resizeBtnDiv = document.createElement('div');
-  resizeBtnDiv.classList.add('resize-div');
+  const todoListDiv = document.createElement('div');
+  todoListDiv.classList.add('todo-div');
 
-  const resizeNavBtn = document.createElement('button');
-  resizeNavBtn.classList.add('resize-btn');
+  const todoTitle = document.createElement('h1');
+  todoTitle.classList.add('todo-title');
+  todoTitle.textContent = 'ToDo';
 
-  resizeBtnDiv.appendChild(resizeNavBtn);
+  todoListDiv.appendChild(todoTitle);
 
-  navSection.append(resizeBtnDiv);
+  navSection.append(todoListDiv);
 }
 
 function mainNavSection() {
   const mainNavDiv = document.createElement('div');
-  mainNavDiv.classList.add('main-nav-div'); // maybe won't need 
+  mainNavDiv.classList.add('main-nav-div');
   navSection.appendChild(mainNavDiv);
 
   const showAllText = document.createElement('h3');
@@ -71,7 +72,6 @@ function createNewProject() {
   if (document.querySelector('.new-projects-div') === null) {
     const newProjectDiv = document.createElement('div');
     newProjectDiv.classList.add('new-projects-div');
-    newProjectDiv.style.display = 'flex';
 
     const btnsDiv = document.createElement('div');
     btnsDiv.classList.add('new-projects-btns-div');
@@ -119,6 +119,8 @@ function saveProject() {
     deleteProjectBtn.classList.add('delete-project-btn');
     deleteProjectBtn.textContent = 'X';
 
+    projectDiv.addEventListener('click', selectSection);
+
     deleteProjectBtn.addEventListener('click', deleteProject);
 
     projectName.textContent = newProjectInput.value;
@@ -129,6 +131,12 @@ function saveProject() {
   } else {
 
   }
+}
+
+//Implement to add background effect on clicked project (project-name div) and remove background effect from other projects
+//This or some other function will have to change name of main Section
+function selectSection() {
+  console.log('Clicked Project');
 }
 
 function deleteProject() {

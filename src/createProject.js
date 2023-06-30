@@ -1,1 +1,0 @@
-//Use Factory function insted of Class

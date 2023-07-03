@@ -16,14 +16,19 @@ const createProject = (name, isDefault = false) => {
   //render it
 };
 
-//DO I NEED THIS ?
+//GET IT TO WORK
 function activeProject() {
-  let projectIsActive = projects.filter(project => project.active === true);
+  let currentlyActive;
+  for (let i = 0; i < projects.length; i++) {
+    if (projects[i].active === true) {
+      currentlyActive = projects[i].name;
+    }
+  }
 
-  return projectIsActive; // will this work ?
+  return currentlyActive;
 }
 
-function switchProject(index) {
+function changeProject(index) {
   changeProjectsToFalse();
 
   projects[index].active = true;
@@ -53,6 +58,6 @@ function changeProjectsToFalse() {
 export {
   createProject,
   activeProject,
-  switchProject,
+  changeProject,
   deleteProject,
 }

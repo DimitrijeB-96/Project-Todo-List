@@ -59,7 +59,8 @@ body {
   font-weight: 700;
   font-size: 3em;
   letter-spacing: 0.1em;
-  margin-bottom: 0.5em;
+  border-bottom: 5px solid var(--slate700);
+  margin-bottom: 0.2em;
 }
 
 .nav-section h1,
@@ -70,11 +71,13 @@ body {
 .nav-section h2 {
   font-size: 2em;
   font-weight: 700;
+  border-bottom: 4px solid var(--slate700);
 }
 
 .nav-section h3 {
-  font-size: 1.4em;
-  padding-left: 0.8em;
+  align-self: center;
+  font-size: 1.2em;
+  padding-left: 1em;
   color: var(--slate800);
 }
 
@@ -82,8 +85,56 @@ body {
   display: flex;
   justify-content: space-between;
   padding-right: 0.8em;
-  height: 2em;
+  height: 2.5em;
   cursor: pointer;
+}
+
+.project-div-creating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 5em;
+  gap: 0.5em;
+}
+
+.project-name-input {
+  box-sizing: border-box;
+  width: 80%;
+  font-size: 1.2em;
+  padding: 0.2em;
+  padding-left: 0.3em;
+  color: var(--slate800);
+  background: var(--slate200);
+
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.project-name-input:focus {
+  outline: 2px solid var(--slate500);
+}
+
+.cancel-creating-btn,
+.add-creating-btn {
+  border: none;
+  height: 2em;
+  font-weight: 700;
+  font-size: 0.9em;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px -2px var(--slate700);
+  color: var(--slate500);
+  background: var(--slate200);
+}
+
+.cancel-creating-btn {
+  margin-right: 1em;
+  width: 6em;
+}
+
+.add-creating-btn {
+  width: 4em;
 }
 
 .project-div-container button {
@@ -104,7 +155,7 @@ body {
 }
 
 .project-div-container:hover {
-  background: var(--slate300);
+  background: linear-gradient(90deg, var(--slate200), var(--slate300));
 }
 
 .create-projects-btn {
@@ -113,10 +164,20 @@ body {
   height: 2.5em;
   font-size: 1.2em;
   font-weight: 700;
-  color: var(--slate700);
+  color: var(--slate500);
+  background: var(--slate200);
 
   border: none;
   border-radius: 10px;
+  box-shadow: 2px 2px 10px -2px var(--slate700);
+}
+
+.create-projects-btn:hover,
+.cancel-creating-btn:hover,
+.add-creating-btn:hover {
+  color: var(--slate800);
+  background: var(--slate300);
+  box-shadow: none;
 }
 
 

@@ -18,16 +18,20 @@ function creatingProjectDiv() {
   const btnDiv = document.createElement('div');
   
   const cancelBtn = document.createElement('button');
+  cancelBtn.classList.add('cancel-creating-btn');
   cancelBtn.textContent = 'Cancel';
   cancelBtn.addEventListener('click', hideCreateProjectDiv);
 
   const addBtn = document.createElement('button');
+  addBtn.classList.add('add-creating-btn');
   addBtn.textContent = 'Add';
   addBtn.addEventListener('click', newProject);
 
   createNavSection.insertBefore(div, createBtn);
   div.append(projectNameInput, btnDiv);
   btnDiv.append(cancelBtn, addBtn);
+
+  projectNameInput.focus();
 }
 
 function hideCreateProjectDiv() {

@@ -1,5 +1,6 @@
 import { projects } from "./index.js";
 import { activeProject } from "./logicProjects.js";
+import { addProject } from "./domManipulations.js";
 
 const createNavSection = document.createElement('div');
 createNavSection.classList.add('nav-section');
@@ -31,6 +32,8 @@ function navigation() {
   createDefaults("Important");
 
   createNavSection.append(projectsText);
+
+  createProjectsBtn();
 }
 
 function createDefaults(name) {
@@ -41,6 +44,19 @@ function createDefaults(name) {
 
   createNavSection.append(div);
   div.append(defaultName);
+}
+
+function createProjectsBtn() {
+  const div = document.createElement('div');
+  div.classList.add('project-div-container');
+
+  const createProjectBtn = document.createElement('button');
+  createProjectBtn.classList.add('create-projects-btn');
+  createProjectBtn.textContent = 'Create Project';
+
+  createProjectBtn.addEventListener('click', addProject);
+
+  createNavSection.append(createProjectBtn);
 }
 
 function header() {
@@ -59,4 +75,5 @@ function main() {
 
 export {
   renderLayout,
+  createNavSection,
 }

@@ -1,5 +1,6 @@
 import { projects } from "./index.js";
 import { changeProject, activeProject } from "./logic/logicProjects";
+import { changeHeaderText } from './header/renderHeader.js';
 
 const handlers = (() => {
   function getProject() {
@@ -9,6 +10,7 @@ const handlers = (() => {
         if(e.target.innerText === projects[i].name) {
           changeProject(i);
           activeProject();
+          changeHeaderText();
           console.log('TEST');
         }
       }

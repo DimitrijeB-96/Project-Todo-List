@@ -3,15 +3,20 @@ import { activeProject, changeProject } from '../logic/logicProjects.js';
 
 function makeHeader() {
   const currentProject = document.createElement('h2');
+  currentProject.classList.add('header-project-text');
   currentProject.textContent = setToHomePage();
 
+  createHeaderSection.append(currentProject);
+}
+
+function changeHeaderText() {
+  const currectProjectText = document.querySelector('.header-project-text');
+
   for (let i = 0; i < projects.length; i++) {
-    if (currentProject.textContent !== activeProject()) {
-      return currentProject.textContent = activeProject();
+    if (currectProjectText.textContent !== activeProject()) {
+      return currectProjectText.textContent = activeProject();
     }
   }
-
-  createHeaderSection.append(currentProject);
 }
 
 function setToHomePage() {
@@ -21,4 +26,5 @@ function setToHomePage() {
 
 export {
   makeHeader,
+  changeHeaderText,
 }

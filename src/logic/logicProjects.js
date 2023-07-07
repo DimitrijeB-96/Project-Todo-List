@@ -1,4 +1,4 @@
-import { projects } from "./index.js";
+import { projects } from "../index.js";
 
 // create delete select active
 // only one project can be active at the time
@@ -16,7 +16,6 @@ const createProject = (name, isDefault = false) => {
   //render it
 };
 
-//GET IT TO WORK
 function activeProject() {
   let currentlyActive;
   for (let i = 0; i < projects.length; i++) {
@@ -33,7 +32,7 @@ function changeProject(index) {
 
   projects[index].active = true;
   
-  // render logit, show this and hide rest
+  return projects[index].name;
 }
 
 function deleteProject(index) {

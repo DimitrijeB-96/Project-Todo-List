@@ -1,34 +1,36 @@
 import './style.css';
-import { renderLayout } from './render';
-import { createTodo, deleteTodo } from './logicTodo';
-import { createProject,
-         deleteProject,
-         changeProject,  
-         activeProject} from './logicProjects.js';
+import { makeHeader as header } from './header/renderHeader.js';
+import { navigation } from './navigation/renderNavigation';
+import { handlers } from './handlers.js';
 
 let projects = [];
 
+//SOMEWHERE ELSE
+const createNavSection = document.createElement('div');
+createNavSection.classList.add('nav-section');
 
+const createHeaderSection = document.createElement('div');
+createHeaderSection.classList.add('header-section');
 
-createProject('All', true);
-createProject('Today', true);
-createProject('Important', true);
+const createMainSection = document.createElement('div');
+createMainSection.classList.add('main-section');
 
-createProject('First Project');
-createProject('Second Project');
-deleteProject(4);
-changeProject(1);
+//SOMEWHERE ELSE
+function renderLayout() {
+  document.body.append(createNavSection, createHeaderSection, createMainSection);
+  navigation();
+  header();
+}
 
 renderLayout();
-
-
-
-
-
+handlers.getProject();
 
 
 export {
   projects,
+  createNavSection,
+  createHeaderSection,
+  createMainSection,
 }
 
 

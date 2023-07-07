@@ -1,4 +1,29 @@
-import { createNavSection } from './render.js';
+import { projects, createNavSection } from '../index.js';
+import { createProject, deleteProject } from '../logic/logicProjects.js';
+
+function createDefaults(name) {
+  createProject(name, true);
+  const div = document.createElement('div');
+  div.classList.add('project-div-container');
+  const defaultName = document.createElement('h3');
+  defaultName.textContent = name;
+
+  createNavSection.append(div);
+  div.append(defaultName);
+}
+
+function createProjectsBtn() {
+  const div = document.createElement('div');
+  div.classList.add('project-div-container');
+
+  const createProjectBtn = document.createElement('button');
+  createProjectBtn.classList.add('create-projects-btn');
+  createProjectBtn.textContent = 'Create Project';
+
+  createProjectBtn.addEventListener('click', addProject);
+
+  createNavSection.append(createProjectBtn);
+}
 
 function addProject() {
   if (document.querySelector('.project-div-creating') === null) {
@@ -41,13 +66,17 @@ function hideCreateProjectDiv() {
 
 function newProject() {
   const projectNameInput = document.querySelector('.project-name-input');
+  const projectName = projectNameInput.value;
 
-  if (projectNameInput.value) {
-    createProject(projectNameInput.value);
+  if (projectName) {
+    displayProject(projectName);
+    createProject(projectName);
+    console.log(projects);
+
   }
 }
 
-function createProject(name) {
+function displayProject(name) {
   const createBtn = document.querySelector('.create-projects-btn');
 
   const div = document.createElement('div');
@@ -58,7 +87,7 @@ function createProject(name) {
 
   const deleteProjectBtn = document.createElement('button');
   deleteProjectBtn.textContent = 'X';
-  deleteProjectBtn.addEventListener('click', deleteProject)
+  deleteProjectBtn.addEventListener('click', deleteProjectDiv)
 
   createNavSection.insertBefore(div, createBtn);
   div.append(projectName, deleteProjectBtn);
@@ -66,10 +95,17 @@ function createProject(name) {
   hideCreateProjectDiv();
 }
 
-function deleteProject() {
+function deleteProjectDiv() {
   this.parentElement.remove();
+  for (let i = 0; i < projects.length; i++) {
+    if (this.previousSibling.textContent === projects[i].name) {
+      deleteProject(i);
+      console.log(projects); // DELETE LATER
+    }
+  }
 }
 
 export {
-  addProject,
+  createDefaults,
+  createProjectsBtn,
 }

@@ -1,5 +1,4 @@
-import { projects, createNavSection } from '../index.js';
-import { createProject, changeProject, activeProject, deleteProject } from '../logic/logicProjects.js';
+import { createNavSection } from '../index.js';
 import { createDefaults, createProjectsBtn } from './navigationManipulations.js';
 
 function navigation() {

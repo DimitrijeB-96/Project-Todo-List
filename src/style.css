@@ -184,10 +184,34 @@ body {
 
 .header-section {
   grid-area: header;
+
+  display: flex;
+  padding-left: 12.5em;
+  margin-bottom: 1em;
+}
+
+.header-project-text {
+  font-family: 'Signika Negative', Arial, Helvetica, sans-serif;
+  font-size: 3em;
+  align-self: flex-end;
+  color: var(--slate700);
 }
 
 .main-section {
   grid-area: main;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.main-container {
+  width: 80%;
+  height: 90%;
+
+  background: var(--slate200);
+  border-radius: 40px;
+  box-shadow: 0 0 12px -5px var(--slate800);
 }
 
 

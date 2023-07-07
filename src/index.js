@@ -1,6 +1,7 @@
 import './style.css';
 import { makeHeader as header } from './header/renderHeader.js';
 import { navigation } from './navigation/renderNavigation';
+import { main } from './main/renderMain.js';
 import { handlers } from './handlers.js';
 
 let projects = [];
@@ -20,6 +21,7 @@ function renderLayout() {
   document.body.append(createNavSection, createHeaderSection, createMainSection);
   navigation();
   header();
+  main();
 }
 
 renderLayout();

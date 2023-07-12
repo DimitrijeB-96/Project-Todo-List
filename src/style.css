@@ -39,3 +39,15 @@ body {
     "nav header"
     "nav main";
 }
+
+.nav-section {
+  grid-area: nav;
+}
+
+.header-section {
+  grid-area: header;
+}
+
+.content-section {
+  grid-area: main;
+}

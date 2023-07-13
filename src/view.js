@@ -7,9 +7,6 @@ export class View {
     this.appTitle = this.createElement('h1');
     this.appTitle.textContent = 'TodoList';
 
-    this.menuTitle = this.createElement('h2');
-    this.menuTitle.textContent = 'Menu';
-
     this.menuList = this.createElement('ul', 'menu-list');
 
     this.menuAll = this.createElement('li');
@@ -28,12 +25,12 @@ export class View {
 
     this.createProjectForm = this.createElement('form', 'creat-project-form');
 
-    this.addProjectBtn = this.createElement('button');
+    this.addProjectBtn = this.createElement('button', 'add-project-btn');
     this.addProjectBtn.textContent = 'Add Project';
 
     this.menuList.append(this.menuAll, this.menuToday, this.menuUpcoming, this.menuImportant);
 
-    this.nav.append(this.appTitle, this.menuTitle, this.menuList, this.projectTitle, this.projectList, this.createProjectForm, this.addProjectBtn);
+    this.nav.append(this.appTitle, this.menuList, this.projectTitle, this.projectList, this.createProjectForm, this.addProjectBtn);
 
     document.body.append(this.nav, this.header, this.content);
   }
@@ -72,7 +69,7 @@ export class View {
         const p = this.createElement('p');
         p.textContent = project.title;
 
-        const btn = this.createElement('button', 'delete-project');
+        const btn = this.createElement('button', 'delete-project-btn');
         btn.textContent = 'X';
 
         li.append(p, btn);
@@ -89,13 +86,14 @@ export class View {
         inputProjectTitle.type = 'text';
         inputProjectTitle.name = 'project-title';
   
-        const cancelBtn = this.createElement('button', 'cancel-project');
+        const cancelBtn = this.createElement('button', 'cancel-project-btn');
         cancelBtn.textContent = 'Cancel';
   
-        const saveBtn = this.createElement('button', 'save-project');
+        const saveBtn = this.createElement('button', 'save-project-btn');
         saveBtn.textContent = 'Save';
 
         this.createProjectForm.append(inputProjectTitle, cancelBtn, saveBtn);
+        inputProjectTitle.focus();
       }
     })
   }
@@ -104,10 +102,10 @@ export class View {
     this.createProjectForm.addEventListener('click', (e) => {
       e.preventDefault();
 
-      if (e.target.className === 'cancel-project') {
+      if (e.target.className === 'cancel-project-btn') {
         this._hideChildElements(this.createProjectForm); 
 
-      } else if (e.target.className === 'save-project') {
+      } else if (e.target.className === 'save-project-btn') {
         const input = this.getElement('.input-title').value;
         if (input) {
           handler(input);
@@ -119,7 +117,7 @@ export class View {
 
   bindDeleteProject(handler) {
     this.projectList.addEventListener('click', (e) => {
-      if (e.target.className === 'delete-project') {
+      if (e.target.className === 'delete-project-btn') {
         const id = parseInt(e.target.parentElement.id);
         handler(id);
       }

@@ -10,6 +10,10 @@
   --slate800: #1e293b;
 
   --red500: #ef4444;
+  --red600: #dc2626;
+
+  --green500: #22c55e;
+  --green600: #16a34a;
 
   --emerald400: #34d399;
   --sky400: #38bdf8;
@@ -40,8 +44,182 @@ body {
     "nav main";
 }
 
+li {
+  list-style: none;
+}
+
 .nav-section {
   grid-area: nav;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: linear-gradient(110deg, var(--sky400), var(--emerald400));
+  border-bottom-right-radius: 30px;
+}
+
+.nav-section h1 {
+  font-size: 4rem;
+  color: var(--slate200);
+  margin-bottom: 0.5em;
+}
+
+.nav-section h2 {
+  font-size: 2.5rem;
+  color: var(--slate200);
+  margin-bottom: 0.5em;
+}
+
+.nav-section ul {
+  align-self: flex-start;
+  width: 100%;
+}
+
+.nav-section li {
+  font-size: 1.5em;
+  padding-left: 2em;
+  cursor: pointer;
+  color: var(--slate700);
+  font-weight: 500;
+  margin-bottom: 0.1em;
+}
+
+.nav-section form {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "input input"
+    "cancel save";
+  row-gap: 0.6em;
+  column-gap: 0.5em;
+
+  margin-bottom: 1em;
+}
+
+.nav-section .project-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-project-btn {
+  color: var(--slate800);
+  width: 35px;
+
+  font-size: 1em;
+  font-weight: 600;
+  
+  
+  align-self: center;
+  text-align: center;
+  margin-right: 0.5em;
+
+  border: none;
+  background: none;
+}
+
+.delete-project-btn:hover {
+  color: var(--slate100);
+  background: var(--red500);
+  border-radius: 8px;
+}
+
+.nav-section li:last-of-type {
+  margin-bottom: 0.5em;
+}
+
+.nav-section li:hover {
+  background: var(--slate200);
+}
+
+.input-title {
+  grid-area: input;
+  justify-self: center;
+
+  width: 90%;
+  height: 32px;
+  font-size: 1.2em;
+  padding-left: 0.2em;
+
+  color: var(--slate800);
+  background: var(--slate200);
+
+  border: none;
+  border-radius: 4px;
+
+  outline: none;
+}
+
+.input-title:focus {
+  border: 2px solid var(--slate500);
+}
+
+.cancel-project-btn,
+.save-project-btn {
+  width: 100px;
+  height: 32px;
+
+  font-size: 1em;
+  font-weight: 700;
+
+  color: var(--slate200);
+
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 1px 6px -1px var(--slate700);
+}
+
+.cancel-project-btn {
+  grid-area: cancel;
+  justify-self: flex-end;
+
+  background: var(--red500);
+}
+
+.save-project-btn {
+  grid-area: save;
+  justify-self: flex-start;
+
+  background: var(--green500);
+}
+
+.cancel-project-btn:hover,
+.save-project-btn:hover {
+  box-shadow: none;
+}
+
+.cancel-project-btn:hover {
+  background: var(--red600);
+}
+
+.save-project-btn:hover {
+  background: var(--green600);
+}
+
+.add-project-btn {
+  width: 60%;
+  height: 40px;
+
+  font-size: 1em;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px 0 var(--slate700);
+
+  color: var(--slate700);
+  background: var(--slate200);
+}
+
+.add-project-btn:hover {
+  color: var(--slate800);
+  background: var(--slate300);
+
+  box-shadow: none;
+  transition: 0.4s ease;
 }
 
 .header-section {

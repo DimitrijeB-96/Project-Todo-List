@@ -1,7 +1,6 @@
 export class Model {
   constructor() {
-    this.projects = []
-    this.todos = [];
+    this.projects = [];
   }
 
   addProject(projectTitle) {
@@ -10,11 +9,19 @@ export class Model {
       title: projectTitle,
     }
 
+    this.projects.push(project);
+
+    this.onProjectListChanged(this.projects);
+  }
+
+  returnProjects() {
     console.log(this.projects);
   }
 
   deleteProject(id) {
     this.projects = this.projects.filter((project) => project.id !== id);
+
+    this.onProjectListChanged(this.projects);
   }
 
   bindProjectListChanged(callback) {

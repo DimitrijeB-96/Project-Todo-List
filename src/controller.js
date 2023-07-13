@@ -3,16 +3,17 @@ export class Controller {
     this.model = model;
     this.view = view;
 
-    this.view.bindAddProject();
-    this.view.bindCancelProject();
-    this.view.bindSaveProject(this.handleAddProject);
-
     this.model.bindProjectListChanged(this.onProjectListChanged);
+    this.view.bindAddProject();
+    this.view.bindCreatingProject(this.handleAddProject);
+    this.view.bindDeleteProject(this.handleDeleteProject);
+    
     this.onProjectListChanged(this.model.projects);
   }
 
   onProjectListChanged = (projects) => {
     this.view.displayProjects(projects);
+    this.model.returnProjects();
   }
 
   handleAddProject = (projectTitle) => {

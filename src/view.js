@@ -27,23 +27,11 @@ export class View {
     this.projectList = this.createElement('ul', 'project-list');
 
     this.createProjectForm = this.createElement('form', 'creat-project-form');
-    this.createProjectForm.style.display = 'none';
-
-    this.inputProjectTitle = this.createElement('input');
-    this.inputProjectTitle.type = 'text';
-
-    this.cancelBtn = this.createElement('button', 'cancel-project');
-    this.cancelBtn.textContent = 'Cancel';
-
-    this.saveBtn = this.createElement('button', 'save-project');
-    this.saveBtn.textContent = 'Save';
 
     this.addProjectBtn = this.createElement('button');
     this.addProjectBtn.textContent = 'Add Project';
 
     this.menuList.append(this.menuAll, this.menuToday, this.menuUpcoming, this.menuImportant);
-
-    this.createProjectForm.append(this.inputProjectTitle, this.cancelBtn, this.saveBtn);
 
     this.nav.append(this.appTitle, this.menuTitle, this.menuList, this.projectTitle, this.projectList, this.createProjectForm, this.addProjectBtn);
 
@@ -65,12 +53,10 @@ export class View {
     return element;
   }
 
-  get _projectTitle() {
-   return this.inputProjectTitle.value;  
-  }
-
-  _resetInput() {
-   return this.inputProjectTitle.value = '';  
+  _hideChildElements(parent) {
+    while(parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
   }
 
   displayProjects(projects) {
@@ -81,6 +67,7 @@ export class View {
     if (projects.length !== 0) {
       projects.forEach((project) => {
         const li = this.createElement('li');
+        li.id = project.id;
 
         const p = this.createElement('p');
         p.textContent = project.title;
@@ -95,41 +82,48 @@ export class View {
     }
   }
 
-  addProject() {
-    
-  }
-
-  _showForm() {
-    this.createProjectForm.style.display = 'flex';
-  }
-
-  _hideForm() {
-    this.createProjectForm.style.display = 'none';
-  }
-
   bindAddProject() {
     this.addProjectBtn.addEventListener('click', () => {
-      this._showForm();
-    })
-  }
+      if (this.createProjectForm.length === 0) {
+        const inputProjectTitle = this.createElement('input', 'input-title');
+        inputProjectTitle.type = 'text';
+        inputProjectTitle.name = 'project-title';
+  
+        const cancelBtn = this.createElement('button', 'cancel-project');
+        cancelBtn.textContent = 'Cancel';
+  
+        const saveBtn = this.createElement('button', 'save-project');
+        saveBtn.textContent = 'Save';
 
-  bindCancelProject() {
-    this.cancelBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      this._hideForm();
-    })
-  }
-
-  bindSaveProject(handler) {
-    this.saveBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      if (this._projectTitle) {
-        handler(this._projectTitle);
-        this._resetInput();
-        this._hideForm();
+        this.createProjectForm.append(inputProjectTitle, cancelBtn, saveBtn);
       }
     })
   }
+
+  bindCreatingProject(handler) {
+    this.createProjectForm.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      if (e.target.className === 'cancel-project') {
+        this._hideChildElements(this.createProjectForm); 
+
+      } else if (e.target.className === 'save-project') {
+        const input = this.getElement('.input-title').value;
+        if (input) {
+          handler(input);
+          this._hideChildElements(this.createProjectForm);
+        }
+      }
+    })
+  }
+
+  bindDeleteProject(handler) {
+    this.projectList.addEventListener('click', (e) => {
+      if (e.target.className === 'delete-project') {
+        const id = parseInt(e.target.parentElement.id);
+        handler(id);
+      }
+    })
+  }
+
 }

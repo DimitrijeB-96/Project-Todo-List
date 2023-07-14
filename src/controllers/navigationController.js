@@ -1,4 +1,4 @@
-export class Controller {
+export class NavigationController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
@@ -13,7 +13,7 @@ export class Controller {
 
   onProjectListChanged = (projects) => {
     this.view.displayProjects(projects);
-    this.model.returnProjects();
+    this.model.returnProjects(); // DELETE LATER
   }
 
   handleAddProject = (projectTitle) => {

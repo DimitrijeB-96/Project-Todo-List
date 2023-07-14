@@ -1,8 +1,6 @@
-export class View {
+export class NavigationView {
   constructor() {
     this.nav = this.createElement('div', 'nav-section');
-    this.header = this.createElement('div', 'header-section');
-    this.content = this.createElement('div', 'content-section');
 
     this.appTitle = this.createElement('h1');
     this.appTitle.textContent = 'TodoList';
@@ -32,7 +30,7 @@ export class View {
 
     this.nav.append(this.appTitle, this.menuList, this.projectTitle, this.projectList, this.createProjectForm, this.addProjectBtn);
 
-    document.body.append(this.nav, this.header, this.content);
+    document.body.append(this.nav);
   }
 
   createElement(tag, className) {

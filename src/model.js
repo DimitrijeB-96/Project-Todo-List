@@ -1,31 +1,35 @@
 export class Model {
   constructor() {
-    this.projects = [];
-
-    this.todos = []; // SHOULD CONTAINE CHECKBOX isComplete, TITLE, DESCRIPTION, TIME (CHECK date-fns)
-
-    this.defaultProjects = [ // SHOULD ADD LOGIC HOW TO RENDER CONTENT FROM EACH OBJECT (MENU, TODAY, UPCOMING, IMPORTANT)
+    this.defaultProjects = [
       {
         id: 1,
         title: 'Menu',
         todos: [],
+        isActive: true,
       },
       {
         id: 2,
         title: 'Today',
         todos: [],
+        isActive: false,
       },
       {
         id: 3,
         title: 'Upcoming',
         todos: [],
+        isActive: false,
       },
       {
         id: 4,
         title: 'Important',
         todos: [],
+        isActive: false,
       }
     ];
+
+    this.projects = [];
+
+    this.allProjects = this.defaultProjects.concat(this.projects);
   }
 
   addProject(projectTitle) {
@@ -33,6 +37,7 @@ export class Model {
       id: this.projects.length > 0 ? this.projects[this.projects.length - 1].id + 1 : 1,
       title: projectTitle,
       todos: [],
+      isActive: true,
     }
 
     this.projects.push(project);
@@ -41,7 +46,7 @@ export class Model {
   }
 
   returnProjects() { // DELETE LATER
-    console.log(this.projects); 
+    console.log(this.allProjects); 
   }
 
   deleteProject(id) {

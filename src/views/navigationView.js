@@ -54,6 +54,14 @@ export class NavigationView {
     }
   }
 
+  _hideAddProjectBtn() {
+    this.addProjectBtn.style.display = 'none';
+  }
+
+  _showAddProjectBtn() {
+    this.addProjectBtn.style.display = 'block';
+  }
+
   displayProjects(projects) {
     while (this.projectList.firstChild) {
       this.projectList.removeChild(this.projectList.firstChild);
@@ -92,6 +100,8 @@ export class NavigationView {
 
         this.createProjectForm.append(inputProjectTitle, cancelBtn, saveBtn);
         inputProjectTitle.focus();
+
+        this._hideAddProjectBtn();
       }
     })
   }
@@ -102,12 +112,14 @@ export class NavigationView {
 
       if (e.target.className === 'cancel-project-btn') {
         this._hideChildElements(this.createProjectForm); 
+        this._showAddProjectBtn();
 
       } else if (e.target.className === 'save-project-btn') {
         const input = this.getElement('.input-title').value;
         if (input) {
           handler(input);
           this._hideChildElements(this.createProjectForm);
+          this._showAddProjectBtn();
         }
       }
     })

@@ -111,7 +111,7 @@ li {
 }
 
 .delete-project-btn {
-  color: var(--slate800);
+  color: var(--slate700);
   width: 35px;
 
   font-size: 1em;

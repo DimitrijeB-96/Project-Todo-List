@@ -66,18 +66,18 @@ export class Model {
     }
   }
 
-  // FIND HOW TO SOLVE THIS IF LAST PROJECT IS SELECTED AND DELETED isActive will be changed to first element from defaultProject
-  // getDefaultPage(id) {
-  //     console.log(id);
-  //     console.log(this.allProjects.length - 1);
-  // }
+  getDefaultPage() {
+    const find = this.allProjects.find(project => project.isActive === true);
+    if (find === undefined) {
+      this.allProjects[0].isActive = true;
+    }
+  }
 
   deleteProject(id) {
     this.projects = this.projects.filter((project) => project.id !== id);
-
-
+    
     this.updateAllProjects();
-    //this.getDefaultPage(id);
+    this.getDefaultPage();
     this.onProjectListChanged(this.projects);
   }
 

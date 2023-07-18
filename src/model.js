@@ -45,6 +45,7 @@ export class Model {
     this.updateAllProjects();
 
     this.onProjectListChanged(this.projects);
+    //this.onAllProjectsListChanged(this.allProjects);
   }
 
   returnProjects() { // DELETE LATER
@@ -78,16 +79,24 @@ export class Model {
     
     this.updateAllProjects();
     this.menuPageIsActivePage();
+
     this.onProjectListChanged(this.projects);
+    //this.onAllProjectsListChanged(this.allProjects);
   }
 
   changeActivePage(id) {
     this.setPagesToFalse();
     this.updateAllProjects();
     this.allProjects[id - 1].isActive = true;
+
+    //this.onAllProjectsListChanged(this.allProjects);
   }
 
   bindProjectListChanged(callback) {
     this.onProjectListChanged = callback;
   }
+
+  // bindAllProjectsListChanged(callback) {
+  //   this.onAllProjectsListChanged = callback;
+  // }
 }

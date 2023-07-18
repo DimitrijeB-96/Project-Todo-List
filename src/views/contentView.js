@@ -92,4 +92,10 @@ export class ContentView {
       document.body.append(background, div);
     })
   }
+
+  // changeCurrentPage(handle) {
+  //   const title = this.currentPage.textContent;
+
+  //   handle(title);
+  // }
 }

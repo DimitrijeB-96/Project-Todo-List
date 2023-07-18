@@ -75,10 +75,10 @@ export class Model {
   deleteProject(id) {
     this.projects = this.projects.filter((project) => project.id !== id);
 
-    this.onProjectListChanged(this.projects);
-    this.updateAllProjects();
 
+    this.updateAllProjects();
     //this.getDefaultPage(id);
+    this.onProjectListChanged(this.projects);
   }
 
   bindProjectListChanged(callback) {

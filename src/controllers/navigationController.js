@@ -7,6 +7,7 @@ export class NavigationController {
     this.view.bindAddProject();
     this.view.bindCreatingProject(this.handleAddProject);
     this.view.bindDeleteProject(this.handleDeleteProject);
+    this.view.bindSelectProject(this.handleActivePage);
     
     this.onProjectListChanged(this.model.projects);
   }
@@ -22,5 +23,11 @@ export class NavigationController {
 
   handleDeleteProject = (id) => {
     this.model.deleteProject(id);
+  }
+
+  handleActivePage = (id) => {
+    this.model.changeActivePage(id);
+
+    this.model.returnProjects();
   }
 }

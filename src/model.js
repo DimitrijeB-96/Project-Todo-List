@@ -40,7 +40,7 @@ export class Model {
       isActive: true,
     }
 
-    this.changeActivePage();
+    this.setPagesToFalse();
     this.projects.push(project);
     this.updateAllProjects();
 
@@ -58,7 +58,7 @@ export class Model {
     this.allProjects = [...this.defaultProjects, ...this.projects];
   }
 
-  changeActivePage() {
+  setPagesToFalse() {
     for (let i = 0; i < this.allProjects.length; i++) {
       if (this.allProjects[i].isActive === true) {
         this.allProjects[i].isActive = false;
@@ -66,7 +66,7 @@ export class Model {
     }
   }
 
-  getDefaultPage() {
+  menuPageIsActivePage() {
     const find = this.allProjects.find(project => project.isActive === true);
     if (find === undefined) {
       this.allProjects[0].isActive = true;
@@ -77,8 +77,14 @@ export class Model {
     this.projects = this.projects.filter((project) => project.id !== id);
     
     this.updateAllProjects();
-    this.getDefaultPage();
+    this.menuPageIsActivePage();
     this.onProjectListChanged(this.projects);
+  }
+
+  changeActivePage(id) {
+    this.setPagesToFalse();
+    this.updateAllProjects();
+    this.allProjects[id - 1].isActive = true;
   }
 
   bindProjectListChanged(callback) {

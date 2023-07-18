@@ -9,12 +9,19 @@ export class NavigationView {
 
     this.menuAll = this.createElement('li');
     this.menuAll.textContent = 'Menu';
+    this.menuAll.id = 1;
+
     this.menuToday = this.createElement('li');
     this.menuToday.textContent = 'Today';
+    this.menuToday.id = 2;
+
     this.menuUpcoming = this.createElement('li');
     this.menuUpcoming.textContent = 'Upcoming';
+    this.menuUpcoming.id = 3;
+
     this.menuImportant = this.createElement('li');
     this.menuImportant.textContent = 'Important';
+    this.menuImportant.id = 4;
 
     this.projectTitle = this.createElement('h2');
     this.projectTitle.textContent = 'Projects';
@@ -70,15 +77,13 @@ export class NavigationView {
     if (projects.length !== 0) {
       projects.forEach((project) => {
         const li = this.createElement('li');
+        li.textContent = project.title;
         li.id = project.id;
-
-        const p = this.createElement('p');
-        p.textContent = project.title;
 
         const btn = this.createElement('button', 'delete-project-btn');
         btn.textContent = 'X';
 
-        li.append(p, btn);
+        li.append(btn);
 
         this.projectList.append(li);
       })
@@ -131,6 +136,15 @@ export class NavigationView {
         const id = parseInt(e.target.parentElement.id);
         handler(id);
       }
+    })
+  }
+
+  bindSelectProject(handler) { // menuList and projectList 
+    this.nav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+          const id = parseInt(e.target.id);
+          handler(id);
+        }
     })
   }
 

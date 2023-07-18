@@ -4,7 +4,7 @@ export class ContentView {
     this.content = this.createElement('div', 'content-section');
 
     this.currentPage = this.createElement('h1', 'current-page-text');
-    this.currentPage.textContent = 'Menu'; // SHOULD ACCEPT METHOD THAT CHECK WHICH PAGE IS CURRENTLY ACTIVE, MOST LIKELY SHOULD ADD isActive FOR EACH OBJECT IN ARRAY
+    this.currentPage.textContent = 'Menu';
 
     this.contentDiv = this.createElement('div', 'content-div');
 

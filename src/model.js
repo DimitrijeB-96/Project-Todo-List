@@ -37,15 +37,13 @@ export class Model {
       id: this.projects.length > 0 ? this.projects[this.projects.length - 1].id + 1 : 5,
       title: projectTitle,
       todos: [],
-      isActive: true,
+      isActive: false,
     }
 
-    this.setPagesToFalse();
     this.projects.push(project);
     this.updateAllProjects();
 
     this.onProjectListChanged(this.projects);
-    //this.onAllProjectsListChanged(this.allProjects);
   }
 
   returnProjects() { // DELETE LATER
@@ -81,22 +79,26 @@ export class Model {
     this.menuPageIsActivePage();
 
     this.onProjectListChanged(this.projects);
-    //this.onAllProjectsListChanged(this.allProjects);
   }
 
   changeActivePage(id) {
     this.setPagesToFalse();
     this.updateAllProjects();
     this.allProjects[id - 1].isActive = true;
+  }
 
-    //this.onAllProjectsListChanged(this.allProjects);
+  getActivePageTitle() {
+    let title;
+    for (let i = 0; i < this.allProjects.length; i++) {
+      if (this.allProjects[i].isActive === true) {
+        title = this.allProjects[i].title;
+      }
+    }
+
+    return title;
   }
 
   bindProjectListChanged(callback) {
     this.onProjectListChanged = callback;
   }
-
-  // bindAllProjectsListChanged(callback) {
-  //   this.onAllProjectsListChanged = callback;
-  // }
 }

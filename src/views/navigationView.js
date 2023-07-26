@@ -7,19 +7,19 @@ export class NavigationView {
 
     this.menuList = this.createElement('ul', 'menu-list');
 
-    this.menuAll = this.createElement('li');
+    this.menuAll = this.createElement('li', 'project');
     this.menuAll.textContent = 'Menu';
     this.menuAll.id = 1;
 
-    this.menuToday = this.createElement('li');
+    this.menuToday = this.createElement('li', 'project');
     this.menuToday.textContent = 'Today';
     this.menuToday.id = 2;
 
-    this.menuUpcoming = this.createElement('li');
+    this.menuUpcoming = this.createElement('li', 'project');
     this.menuUpcoming.textContent = 'Upcoming';
     this.menuUpcoming.id = 3;
 
-    this.menuImportant = this.createElement('li');
+    this.menuImportant = this.createElement('li', 'project');
     this.menuImportant.textContent = 'Important';
     this.menuImportant.id = 4;
 
@@ -76,7 +76,7 @@ export class NavigationView {
 
     if (projects.length !== 0) {
       projects.forEach((project) => {
-        const li = this.createElement('li');
+        const li = this.createElement('li', 'project');
         li.textContent = project.title;
         li.id = project.id;
 

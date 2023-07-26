@@ -93,9 +93,31 @@ export class ContentView {
     })
   }
 
-  // changeCurrentPage(handle) {
-  //   const title = this.currentPage.textContent;
+  setTitle() {
+    let title = this.currentPage;
+    
+    const navSection = this.getElement('.nav-section');
+    navSection.addEventListener('click', (e) => {
+      if (e.target.className === 'project') {
+        title.textContent = e.target.firstChild.textContent;
+      }
+    });
+  }
 
-  //   handle(title);
-  // }
+  updateTitle() {
+    let title = this.currentPage;
+
+    let elementFound = false;
+
+    const projects = document.querySelectorAll('.project');
+    projects.forEach(project => {
+      if (project.firstChild.textContent === title.textContent) {
+        elementFound = true;
+      }
+    });
+
+    if (elementFound === false) {
+      title.textContent = projects[0].textContent;
+    }
+  }
 }

@@ -37,6 +37,34 @@ export class ContentView {
     return element;
   }
 
+  setTitle() {
+    let title = this.currentPage;
+    
+    const navSection = this.getElement('.nav-section');
+    navSection.addEventListener('click', (e) => {
+      if (e.target.className === 'project') {
+        title.textContent = e.target.firstChild.textContent;
+      }
+    });
+  }
+
+  updateTitle() {
+    let title = this.currentPage;
+
+    let elementFound = false;
+
+    const projects = document.querySelectorAll('.project');
+    projects.forEach(project => {
+      if (project.firstChild.textContent === title.textContent) {
+        elementFound = true;
+      }
+    });
+
+    if (elementFound === false) {
+      title.textContent = projects[0].textContent;
+    }
+  }
+
   // LABEL + INPUT of TITLE, LABEL + TEXTBOX for DESCRIPTION, LABEL + INPUT for TIME, BUTTON for CREATE
   bindCreateTodo() {
     this.addNewTodoBtn.addEventListener('click', () => {
@@ -80,12 +108,26 @@ export class ContentView {
       descriptionInput.id = 'task-description';
       descriptionInput.name = 'task-description';
 
+      const checkboxDiv = this.createElement('div');
+
+      const isImportant = this.createElement('input');
+      isImportant.type = 'checkbox';
+      isImportant.id = 'task-important';
+      isImportant.name = 'task-important';
+      isImportant.checked = false; //DOESN'T WORK!
+
+      const isImportantText = this.createElement('label');
+      isImportantText.textContent = 'Mark as important';
+      isImportantText.htmlFor = 'task-important';
+
       const createTaskBtn = this.createElement('button', 'create-todo-btn');
       createTaskBtn.textContent = 'Create';
 
       headerDiv.append(title, closeBtn);
 
-      form.append(titleText, titleInput, dateText, dateInput, descriptionText, descriptionInput, createTaskBtn);
+      checkboxDiv.append(isImportant, isImportantText);
+
+      form.append(titleText, titleInput, dateText, dateInput, descriptionText, descriptionInput, checkboxDiv, createTaskBtn);
 
       div.append(headerDiv, form);
 
@@ -93,31 +135,36 @@ export class ContentView {
     })
   }
 
-  setTitle() {
-    let title = this.currentPage;
-    
-    const navSection = this.getElement('.nav-section');
-    navSection.addEventListener('click', (e) => {
-      if (e.target.className === 'project') {
-        title.textContent = e.target.firstChild.textContent;
+  bindSaveTodoList() {
+    document.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const titleInput = this.getElement('#task-title');
+      const dateInput = this.getElement('#task-date');
+      const descriptionInput = this.getElement('#task-description');
+
+      if (e.target.className === 'create-todo-btn') {
+        if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {
+
+          this._hideTodoCreatingDiv();
+        }
       }
-    });
+      
+      if (e.target.className === 'close-todo-create-btn') {
+        this._hideTodoCreatingDiv();
+      }
+    })
   }
 
-  updateTitle() {
-    let title = this.currentPage;
+  _hideTodoCreatingDiv() {
+    const div = this.getElement('.create-todo-div');
+    const background = this.getElement('.background');
 
-    let elementFound = false;
+    div.remove();
+    background.remove();
+  }
 
-    const projects = document.querySelectorAll('.project');
-    projects.forEach(project => {
-      if (project.firstChild.textContent === title.textContent) {
-        elementFound = true;
-      }
-    });
+  displayTodoList() {
 
-    if (elementFound === false) {
-      title.textContent = projects[0].textContent;
-    }
   }
 }

@@ -5,14 +5,15 @@ export class Controller {
     this.contentView = contentView;
     
     this.model.bindProjectListChanged(this.onProjectListChanged);
+
     this.navView.bindAddProject();
     this.navView.bindCreatingProject(this.handleAddProject);
     this.navView.bindDeleteProject(this.handleDeleteProject);
     this.navView.bindSelectProject(this.handleActivePage);
 
     this.contentView.bindCreateTodo();
-
     this.contentView.setTitle(this.handleChangeTitle);
+    this.contentView.bindSaveTodoList();
     
     this.onProjectListChanged(this.model.projects);
   }

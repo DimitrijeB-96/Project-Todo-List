@@ -308,7 +308,7 @@ li {
 .create-todo-div {
   /* Position Absolute pop-up window to the center of the screen */
   position: absolute;
-  height: 500px;
+  height: 600px;
   width: 400px;
 
   margin-left: -200px;
@@ -330,7 +330,7 @@ li {
   justify-content: center;
 
   width: 100%;
-  height: 15%;
+  height: 12%;
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -378,7 +378,7 @@ li {
   flex-direction: column;
 
   width: 100%;
-  height: 85%;
+  height: 88%;
 
   padding: 10px;
   padding-top: 20px;
@@ -399,7 +399,8 @@ li {
   margin-top: 0;
 }
 
-.create-todo-form input,
+.create-todo-form input[type="text"],
+.create-todo-form input[type="date"],
 .create-todo-form textarea {
   align-self: center;
 
@@ -417,7 +418,8 @@ li {
   outline: none;
 }
 
-.create-todo-form input {
+.create-todo-form input[type="text"],
+.create-todo-form input[type="date"] {
   height: 32px;
 
   font-size: 1em;
@@ -425,7 +427,8 @@ li {
   padding: 0 5px;
 }
 
-.create-todo-form input:focus {
+.create-todo-form input[type="text"]:focus,
+.create-todo-form input[type="date"]:focus {
   border: 2px solid var(--sky400);
 }
 
@@ -437,6 +440,30 @@ li {
   padding: 5px;
 
   resize: none;
+}
+
+.create-todo-form div {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.create-todo-form input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.create-todo-form input[type="checkbox"]:focus {
+
+}
+
+.create-todo-form input[type="checkbox"]::before {
+
+}
+
+.create-todo-form input[type="checkbox"]:checked::before {
+
 }
 
 .create-todo-form .create-todo-btn {

@@ -108,20 +108,20 @@ export class ContentView {
       descriptionInput.id = 'task-description';
       descriptionInput.name = 'task-description';
 
-      const checkboxDiv = this.createElement('div');
-
-      const isImportant = this.createElement('input');
-      isImportant.type = 'checkbox';
-      isImportant.id = 'task-important';
-      isImportant.name = 'task-important';
-      isImportant.checked = false; //DOESN'T WORK!
+      const checkboxDiv = this.createElement('div', 'create-todo-checkbox-div');
 
       const isImportantText = this.createElement('label');
       isImportantText.textContent = 'Mark as important';
-      isImportantText.htmlFor = 'task-important';
+      // isImportantText.htmlFor = 'task-important';
+
+      const isImportant = this.createElement('input');
+      isImportant.type = 'checkbox';
+      // isImportant.id = 'task-important';
+      // isImportant.name = 'task-important';
 
       const createTaskBtn = this.createElement('button', 'create-todo-btn');
       createTaskBtn.textContent = 'Create';
+      createTaskBtn.type = 'button';
 
       headerDiv.append(title, closeBtn);
 
@@ -137,7 +137,7 @@ export class ContentView {
 
   bindSaveTodoList() {
     document.addEventListener('click', (e) => {
-      e.preventDefault();
+      //e.preventDefault();
 
       const titleInput = this.getElement('#task-title');
       const dateInput = this.getElement('#task-date');
@@ -145,8 +145,8 @@ export class ContentView {
 
       if (e.target.className === 'create-todo-btn') {
         if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {
-
-          this._hideTodoCreatingDiv();
+          
+          //this._hideTodoCreatingDiv();
         }
       }
       

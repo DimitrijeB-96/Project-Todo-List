@@ -428,7 +428,8 @@ li {
 }
 
 .create-todo-form input[type="text"]:focus,
-.create-todo-form input[type="date"]:focus {
+.create-todo-form input[type="date"]:focus,
+.create-todo-form textarea:focus {
   border: 2px solid var(--sky400);
 }
 
@@ -442,28 +443,49 @@ li {
   resize: none;
 }
 
-.create-todo-form div {
+.create-todo-checkbox-div {
   display: flex;
   height: 80px;
   align-items: center;
   padding: 0 15px;
 }
 
+.create-todo-checkbox-div label {
+  padding-left: 10px;
+}
+
 .create-todo-form input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+  appearance: none;
+  position: relative;
+
+  width: 30px;
+  height: 30px;
+  margin-top: -3px;
+
+  box-shadow: 0 0 10px -2px var(--slate500);
+  border-radius: 6px;
+
+  background-color: var(--slate100);
 }
 
 .create-todo-form input[type="checkbox"]:focus {
-
+  outline: none;
+  border: 2px solid var(--sky400);
 }
 
 .create-todo-form input[type="checkbox"]::before {
+  position: absolute;
+  content: "✗";
 
+  font-size: 32px;
+  margin-top: -4px;
+  color: var(--slate700);
+
+  visibility: hidden;
 }
 
 .create-todo-form input[type="checkbox"]:checked::before {
-
+  visibility: visible;
 }
 
 .create-todo-form .create-todo-btn {
@@ -487,4 +509,4 @@ li {
 .create-todo-form .create-todo-btn:hover {
   background: var(--sky500);
   box-shadow: none; 
-}
+} 

@@ -3,26 +3,27 @@ export class Model {
     this.defaultProjects = [
       {
         id: 1,
-        title: 'Menu',
-        todos: [],
+        title: 'All',
+        // Checkbox isTaskCompleted, h3 taskTitle, p taskDescription, checkbox isImportant, button removeTask
+        todos: [{id: 1, taskName: 'First task in all tasks', taskDescription: 'This task is not really a task.', date: '30.07.2023', isTaskCompleted: false, isTaskImportant: false}],
         isActive: true,
       },
       {
         id: 2,
         title: 'Today',
-        todos: [],
+        todos: [{id: 1, task: 'This is todays task', taskDescription: 'Do this today...', date: '27.07.2023', isTaskCompleted: false, isTaskImportant: false}],
         isActive: false,
       },
       {
         id: 3,
         title: 'Upcoming',
-        todos: [],
+        todos: [{id: 1, task: 'Upcoming task', taskDescription: 'This is task to do in futre', date: '31.12.2023', isTaskCompleted: false, isTaskImportant: false}],
         isActive: false,
       },
       {
         id: 4,
         title: 'Important',
-        todos: [],
+        todos: [{id: 1, task: 'This is important task!', taskDescription: 'You must do this task!', date: '28.07.2023', isTaskCompleted: false, isTaskImportant: true}],
         isActive: false,
       }
     ];
@@ -30,6 +31,8 @@ export class Model {
     this.projects = [];
 
     this.allProjects = this.defaultProjects;
+
+    this.todos = [];
   }
 
   addProject(projectTitle) {
@@ -44,6 +47,21 @@ export class Model {
     this.updateAllProjects();
 
     this.onProjectListChanged(this.projects);
+  }
+
+  // do I need to check where it is located ?
+  addTask(name, description, date, isImportant) {
+    const todo = {
+      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+      taskName: name,
+      taskDescription: description,
+      taskDate: date,
+      isTaskCompleted: false,
+      isTaskImportant: isImportant,
+    }
+
+    this.todos.push(todo);
+    this.onTodoListChanged(this.todos);
   }
 
   returnProjects() { // DELETE LATER
@@ -81,6 +99,12 @@ export class Model {
     this.onProjectListChanged(this.projects);
   }
 
+  deleteTask(id) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
+
+    // Add more methods for deling task
+  }
+
   changeActivePage(id) {
     this.setPagesToFalse();
     this.updateAllProjects();
@@ -98,7 +122,28 @@ export class Model {
     return title;
   }
 
+  getAllTasks() {
+    // Implement logic to show all tasks
+    return this.todos;
+  }
+
+  getTodaysTasks() {
+    // Implement logic to show only tasks where todays date is the same as task date
+  }
+
+  getUpcomingTasks() {
+    // Implement logic to show only tasks where task date is "greater" then todays date
+  }
+
+  getImportantTasks() {
+    // Implement logic to show only tasks where checkbox isImportant is checked
+  }
+
   bindProjectListChanged(callback) {
     this.onProjectListChanged = callback;
+  }
+
+  bindTodoListChanged(callback) {
+    this.onTodoListChanged = callback;
   }
 }

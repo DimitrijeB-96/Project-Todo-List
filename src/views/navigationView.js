@@ -8,7 +8,7 @@ export class NavigationView {
     this.menuList = this.createElement('ul', 'menu-list');
 
     this.menuAll = this.createElement('li', 'project');
-    this.menuAll.textContent = 'Menu';
+    this.menuAll.textContent = 'All';
     this.menuAll.id = 1;
 
     this.menuToday = this.createElement('li', 'project');
@@ -139,7 +139,7 @@ export class NavigationView {
     })
   }
 
-  bindSelectProject(handler) { // menuList and projectList 
+  bindSelectProject(handler) {
     this.nav.addEventListener('click', (e) => {
         if (e.target.tagName === 'LI') {
           const id = parseInt(e.target.id);

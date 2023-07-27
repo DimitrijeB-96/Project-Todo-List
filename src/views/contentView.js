@@ -4,7 +4,7 @@ export class ContentView {
     this.content = this.createElement('div', 'content-section');
 
     this.currentPage = this.createElement('h1', 'current-page-text');
-    this.currentPage.textContent = 'Menu';
+    this.currentPage.textContent = 'All';
 
     this.contentDiv = this.createElement('div', 'content-div');
 
@@ -137,7 +137,6 @@ export class ContentView {
 
   bindSaveTodoList() {
     document.addEventListener('click', (e) => {
-      //e.preventDefault();
 
       const titleInput = this.getElement('#task-title');
       const dateInput = this.getElement('#task-date');
@@ -146,7 +145,7 @@ export class ContentView {
       if (e.target.className === 'create-todo-btn') {
         if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {
           
-          //this._hideTodoCreatingDiv();
+          this._hideTodoCreatingDiv();
         }
       }
       
@@ -164,7 +163,40 @@ export class ContentView {
     background.remove();
   }
 
-  displayTodoList() {
+  displayTodoList(todos) {
+    while(this.todosList.firstChild) {
+      this.todosList.remove(this.todosList.firstChild);
+    }
+
+    if (todos.length !== 0) {
+      todos.forEach(todo => {
+        const li = this.createElement('li', 'task');
+
+        const taskName = this.createElement('h3', 'task-name');
+        taskName.textContent = todo.taskName;
+
+        const taskDescription = this.createElement('p', 'task-description');
+        taskDescription.textContent = todo.taskDescription;
+
+        // Maybe this should be presented as paragraph ?
+        const taskDate = this.createElement('input', 'task-date');
+        taskDate.type = 'date';
+
+        const isImportant = this.createElement('input', 'task-important');
+        isImportant.type = 'checkbox';
+
+        const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
+        deleteTaskBtn.textContent = 'X';
+
+        const isTaskCompleted = this.createElement('input', 'task-completed');
+        isTaskCompleted.type = 'checkbox';
+
+        li.append(isTaskCompleted, taskName, taskDescription, taskDate, isImportant, deleteTaskBtn);
+
+        this.todosList.append(li);
+      })
+    }
+
 
   }
 }

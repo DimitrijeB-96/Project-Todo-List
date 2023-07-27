@@ -5,6 +5,7 @@ export class Controller {
     this.contentView = contentView;
     
     this.model.bindProjectListChanged(this.onProjectListChanged);
+    this.model.bindTodoListChanged(this.onTodoListChanged);
 
     this.navView.bindAddProject();
     this.navView.bindCreatingProject(this.handleAddProject);
@@ -14,7 +15,8 @@ export class Controller {
     this.contentView.setTitle(this.handleChangeTitle);
     this.contentView.bindCreateTodo();
     this.contentView.bindSaveTodoList();
-    
+
+    this.onTodoListChanged(this.model.todos);
     this.onProjectListChanged(this.model.projects);
   }
 
@@ -23,13 +25,25 @@ export class Controller {
     this.model.returnProjects(); // DELETE LATER
   }
 
+  onTodoListChanged = (todos) => {
+    this.contentView.displayTodoList(todos);
+  }
+
   handleAddProject = (projectTitle) => {
     this.model.addProject(projectTitle);
+  }
+
+  handleAddTask = (taskTitle, taskDescription, taskDate, taskImportant) => {
+    this.model.addTodo(taskTitle, taskDescription, taskDate, taskImportant);
   }
 
   handleDeleteProject = (id) => {
     this.model.deleteProject(id);
     this.contentView.updateTitle();
+  }
+
+  handleDeleteTask = (id) => {
+    this.model.deleteTask(id);
   }
 
   handleActivePage = (id) => {

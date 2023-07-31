@@ -10,8 +10,10 @@ export class ContentView {
 
     this.todosList = this.createElement('ul', 'todos-list');
 
+    //THIS SHOULD BE DISPLAYED ONLY WHEN PROJECT IS ACTIVE
     this.addNewTodoBtn = this.createElement('button', 'new-todo-btn');
     this.addNewTodoBtn.textContent = '+';
+    this.addNewTodoBtn.style.display = 'none';
 
     this.header.append(this.currentPage);
 
@@ -62,10 +64,10 @@ export class ContentView {
 
     if (elementFound === false) {
       title.textContent = projects[0].textContent;
+      this.hideAddTaskBtn();
     }
   }
 
-  // LABEL + INPUT of TITLE, LABEL + TEXTBOX for DESCRIPTION, LABEL + INPUT for TIME, BUTTON for CREATE
   bindCreateTodo() {
     this.addNewTodoBtn.addEventListener('click', () => {
       const div = this.createElement('div', 'create-todo-div');
@@ -112,12 +114,12 @@ export class ContentView {
 
       const isImportantText = this.createElement('label');
       isImportantText.textContent = 'Mark as important';
-      // isImportantText.htmlFor = 'task-important';
+      isImportantText.htmlFor = 'task-important';
 
       const isImportant = this.createElement('input');
       isImportant.type = 'checkbox';
-      // isImportant.id = 'task-important';
-      // isImportant.name = 'task-important';
+      isImportant.id = 'task-important';
+      isImportant.name = 'task-important';
 
       const createTaskBtn = this.createElement('button', 'create-todo-btn');
       createTaskBtn.textContent = 'Create';
@@ -135,16 +137,18 @@ export class ContentView {
     })
   }
 
-  bindSaveTodoList() {
+  bindSaveTodoList(handler) {
     document.addEventListener('click', (e) => {
 
       const titleInput = this.getElement('#task-title');
       const dateInput = this.getElement('#task-date');
       const descriptionInput = this.getElement('#task-description');
 
+      const isImportant = this.getElement('#task-important');
+
       if (e.target.className === 'create-todo-btn') {
         if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {
-          
+          handler(titleInput.value, descriptionInput.value, dateInput.value, isImportant.value);
           this._hideTodoCreatingDiv();
         }
       }
@@ -163,40 +167,48 @@ export class ContentView {
     background.remove();
   }
 
-  displayTodoList(todos) {
-    while(this.todosList.firstChild) {
-      this.todosList.remove(this.todosList.firstChild);
-    }
-
-    if (todos.length !== 0) {
-      todos.forEach(todo => {
-        const li = this.createElement('li', 'task');
-
-        const taskName = this.createElement('h3', 'task-name');
-        taskName.textContent = todo.taskName;
-
-        const taskDescription = this.createElement('p', 'task-description');
-        taskDescription.textContent = todo.taskDescription;
-
-        // Maybe this should be presented as paragraph ?
-        const taskDate = this.createElement('input', 'task-date');
-        taskDate.type = 'date';
-
-        const isImportant = this.createElement('input', 'task-important');
-        isImportant.type = 'checkbox';
-
-        const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
-        deleteTaskBtn.textContent = 'X';
-
-        const isTaskCompleted = this.createElement('input', 'task-completed');
-        isTaskCompleted.type = 'checkbox';
-
-        li.append(isTaskCompleted, taskName, taskDescription, taskDate, isImportant, deleteTaskBtn);
-
-        this.todosList.append(li);
-      })
-    }
-
-
+  showAddTaskBtn() {
+    this.addNewTodoBtn.style.display = 'inline';
   }
+
+  hideAddTaskBtn() {
+    this.addNewTodoBtn.style.display = 'none';
+  }
+
+  // displayTodoList(todos) {
+  //   while(this.todosList.firstChild) {
+  //     this.todosList.remove(this.todosList.firstChild);
+  //   }
+
+  //   if (todos.length !== 0) {
+  //     todos.forEach(todo => {
+  //       const li = this.createElement('li', 'task');
+
+  //       const taskName = this.createElement('h3', 'task-name');
+  //       taskName.textContent = todo.taskName;
+
+  //       const taskDescription = this.createElement('p', 'task-description');
+  //       taskDescription.textContent = todo.taskDescription;
+
+  //       // Maybe this should be presented as paragraph ?
+  //       const taskDate = this.createElement('input', 'task-date');
+  //       taskDate.type = 'date';
+
+  //       const isImportant = this.createElement('input', 'task-important');
+  //       isImportant.type = 'checkbox';
+
+  //       const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
+  //       deleteTaskBtn.textContent = 'X';
+
+  //       const isTaskCompleted = this.createElement('input', 'task-completed');
+  //       isTaskCompleted.type = 'checkbox';
+
+  //       li.append(isTaskCompleted, taskName, taskDescription, taskDate, isImportant, deleteTaskBtn);
+
+  //       this.todosList.append(li);
+  //     })
+  //   }
+
+
+  // }
 }

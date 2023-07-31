@@ -1,38 +1,15 @@
 export class Model {
   constructor() {
     this.defaultProjects = [
-      {
-        id: 1,
-        title: 'All',
-        // Checkbox isTaskCompleted, h3 taskTitle, p taskDescription, checkbox isImportant, button removeTask
-        todos: [{id: 1, taskName: 'First task in all tasks', taskDescription: 'This task is not really a task.', date: '30.07.2023', isTaskCompleted: false, isTaskImportant: false}],
-        isActive: true,
-      },
-      {
-        id: 2,
-        title: 'Today',
-        todos: [{id: 1, task: 'This is todays task', taskDescription: 'Do this today...', date: '27.07.2023', isTaskCompleted: false, isTaskImportant: false}],
-        isActive: false,
-      },
-      {
-        id: 3,
-        title: 'Upcoming',
-        todos: [{id: 1, task: 'Upcoming task', taskDescription: 'This is task to do in futre', date: '31.12.2023', isTaskCompleted: false, isTaskImportant: false}],
-        isActive: false,
-      },
-      {
-        id: 4,
-        title: 'Important',
-        todos: [{id: 1, task: 'This is important task!', taskDescription: 'You must do this task!', date: '28.07.2023', isTaskCompleted: false, isTaskImportant: true}],
-        isActive: false,
-      }
+      { id: 1, title: 'All', todos: [], isActive: true },
+      { id: 2, title: 'Today', todos: [], isActive: false },
+      { id: 3, title: 'Upcoming', todos: [], isActive: false },
+      { id: 4, title: 'Important', todos: [], isActive: false }
     ];
 
     this.projects = [];
 
     this.allProjects = this.defaultProjects;
-
-    this.todos = [];
   }
 
   addProject(projectTitle) {
@@ -49,10 +26,17 @@ export class Model {
     this.onProjectListChanged(this.projects);
   }
 
-  // do I need to check where it is located ?
   addTask(name, description, date, isImportant) {
+    let activeProject;
+
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i].isActive) {
+        activeProject = this.projects[i];
+      }
+    }
+
     const todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+      id: activeProject.todos.length > 0 ? activeProject.todos[activeProject.todos.length - 1].id + 1 : 1,
       taskName: name,
       taskDescription: description,
       taskDate: date,
@@ -60,8 +44,11 @@ export class Model {
       isTaskImportant: isImportant,
     }
 
-    this.todos.push(todo);
-    this.onTodoListChanged(this.todos);
+    this.updateAllProjects();
+
+    activeProject.todos.push(todo);
+
+    // this.onTodoListChanged(this.todos);
   }
 
   returnProjects() { // DELETE LATER
@@ -102,13 +89,18 @@ export class Model {
   deleteTask(id) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
 
-    // Add more methods for deling task
+    // ADJUST HERE
   }
 
   changeActivePage(id) {
     this.setPagesToFalse();
     this.updateAllProjects();
-    this.allProjects[id - 1].isActive = true;
+
+    for (let i = 0; i < this.allProjects.length; i++) {
+      if (this.allProjects[i].id === id) {
+        this.allProjects[i].isActive = true;
+      }
+    }
   }
 
   getActivePageTitle() {
@@ -122,9 +114,24 @@ export class Model {
     return title;
   }
 
+  isActivePageProject(id) {
+    let isProjectActive = false;
+
+    if (this.projects.length > 0) {
+      for (let i = 0; i < this.projects.length; i++) {
+        if (this.projects[i].id === id) {
+          if (this.projects[i].isActive) {
+            isProjectActive = true;
+          }
+        }
+      }
+    }
+
+    return isProjectActive;
+  }
+
   getAllTasks() {
     // Implement logic to show all tasks
-    return this.todos;
   }
 
   getTodaysTasks() {
@@ -143,6 +150,7 @@ export class Model {
     this.onProjectListChanged = callback;
   }
 
+  // ?
   bindTodoListChanged(callback) {
     this.onTodoListChanged = callback;
   }

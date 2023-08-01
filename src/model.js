@@ -7,6 +7,8 @@ export class Model {
       { id: 4, title: 'Important', todos: [], isActive: false }
     ];
 
+    this.todos = [];
+
     this.projects = [];
 
     this.allProjects = this.defaultProjects;
@@ -44,11 +46,10 @@ export class Model {
       isTaskImportant: isImportant,
     }
 
+    activeProject.todos.push(todo);
     this.updateAllProjects();
 
-    activeProject.todos.push(todo);
-
-    // this.onTodoListChanged(this.todos);
+    this.onTodoListChanged(this.projects.todos);
   }
 
   returnProjects() { // DELETE LATER
@@ -131,7 +132,9 @@ export class Model {
   }
 
   getAllTasks() {
-    // Implement logic to show all tasks
+    for (let i = 0; i < this.projects.length; i++) {
+      this.todos.push(this.projects[i].todos);
+    }
   }
 
   getTodaysTasks() {
@@ -150,7 +153,6 @@ export class Model {
     this.onProjectListChanged = callback;
   }
 
-  // ?
   bindTodoListChanged(callback) {
     this.onTodoListChanged = callback;
   }

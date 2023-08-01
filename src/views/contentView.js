@@ -175,40 +175,38 @@ export class ContentView {
     this.addNewTodoBtn.style.display = 'none';
   }
 
-  // displayTodoList(todos) {
-  //   while(this.todosList.firstChild) {
-  //     this.todosList.remove(this.todosList.firstChild);
-  //   }
+  displayTodoList(todos) {
+    while(this.todosList.firstChild) {
+      this.todosList.remove(this.todosList.firstChild);
+    }
 
-  //   if (todos.length !== 0) {
-  //     todos.forEach(todo => {
-  //       const li = this.createElement('li', 'task');
+    if (todos.length !== 0) {
+      todos.forEach(todo => {
+        const li = this.createElement('li', 'task');
 
-  //       const taskName = this.createElement('h3', 'task-name');
-  //       taskName.textContent = todo.taskName;
+        const taskName = this.createElement('h3', 'task-name');
+        taskName.textContent = todo.taskName;
 
-  //       const taskDescription = this.createElement('p', 'task-description');
-  //       taskDescription.textContent = todo.taskDescription;
+        const taskDescription = this.createElement('p', 'task-description');
+        taskDescription.textContent = todo.taskDescription;
 
-  //       // Maybe this should be presented as paragraph ?
-  //       const taskDate = this.createElement('input', 'task-date');
-  //       taskDate.type = 'date';
+        // Maybe this should be presented as paragraph ?
+        const taskDate = this.createElement('p', 'task-date');
+        taskDate.type = 'date';
 
-  //       const isImportant = this.createElement('input', 'task-important');
-  //       isImportant.type = 'checkbox';
+        const isImportant = this.createElement('input', 'task-important');
+        isImportant.type = 'checkbox';
 
-  //       const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
-  //       deleteTaskBtn.textContent = 'X';
+        const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
+        deleteTaskBtn.textContent = 'X';
 
-  //       const isTaskCompleted = this.createElement('input', 'task-completed');
-  //       isTaskCompleted.type = 'checkbox';
+        const isTaskCompleted = this.createElement('input', 'task-completed');
+        isTaskCompleted.type = 'checkbox';
 
-  //       li.append(isTaskCompleted, taskName, taskDescription, taskDate, isImportant, deleteTaskBtn);
+        li.append(isTaskCompleted, taskName, taskDescription, taskDate, isImportant, deleteTaskBtn);
 
-  //       this.todosList.append(li);
-  //     })
-  //   }
-
-
-  // }
+        this.todosList.append(li);
+      })
+    }
+  }
 }

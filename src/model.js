@@ -1,10 +1,10 @@
 export class Model {
   constructor() {
     this.defaultProjects = [
-      { id: 1, title: 'All', todos: [], isActive: true },
-      { id: 2, title: 'Today', todos: [], isActive: false },
-      { id: 3, title: 'Upcoming', todos: [], isActive: false },
-      { id: 4, title: 'Important', todos: [], isActive: false }
+      { id: 1, title: 'All', isActive: true },
+      { id: 2, title: 'Today', isActive: false },
+      { id: 3, title: 'Upcoming', isActive: false },
+      { id: 4, title: 'Important', isActive: false }
     ];
 
     this.todos = [];
@@ -18,7 +18,6 @@ export class Model {
     const project = {
       id: this.projects.length > 0 ? this.projects[this.projects.length - 1].id + 1 : 5,
       title: projectTitle,
-      todos: [],
       isActive: false,
     }
 
@@ -38,18 +37,18 @@ export class Model {
     }
 
     const todo = {
-      id: activeProject.todos.length > 0 ? activeProject.todos[activeProject.todos.length - 1].id + 1 : 1,
+      id: this.todos > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       taskName: name,
       taskDescription: description,
       taskDate: date,
       isTaskCompleted: false,
       isTaskImportant: isImportant,
+      whichProjectHoldThisTask: activeProject.title,
     }
 
-    activeProject.todos.push(todo);
-    this.updateAllProjects();
+    this.todos.push(todo);
 
-    this.onTodoListChanged(this.projects.todos);
+    this.onTodoListChanged(this.todos);
   }
 
   returnProjects() { // DELETE LATER
@@ -131,22 +130,45 @@ export class Model {
     return isProjectActive;
   }
 
-  getAllTasks() {
+  getActiveProjectTasks() {
+    let activePageTasks = [];
+
     for (let i = 0; i < this.projects.length; i++) {
-      this.todos.push(this.projects[i].todos);
+      for (let j = 0; j < this.todos.length; j++) {
+        if (this.projects[i].isActive) {
+          if (this.todos[j].whichProjectHoldThisTask === this.projects[i].title) {
+            activePageTasks.push(this.todos[j]);
+          }
+        }
+      }
     }
+
+    return activePageTasks;
+  }
+
+  getAllTasks() {
+    // Implement logic to show all todos
+    return this.todos;
   }
 
   getTodaysTasks() {
-    // Implement logic to show only tasks where todays date is the same as task date
+    // Implement logic to show only todos where todays date is the same as task date
   }
 
   getUpcomingTasks() {
-    // Implement logic to show only tasks where task date is "greater" then todays date
+    // Implement logic to show only todos where task date is "greater" then todays date
   }
 
   getImportantTasks() {
-    // Implement logic to show only tasks where checkbox isImportant is checked
+    let onlyImportantTasks = [];
+
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i].isTaskImportant === 'checked') {
+        onlyImportantTasks.push(this.todos[i]);
+      }
+    }
+
+    return onlyImportantTasks;
   }
 
   bindProjectListChanged(callback) {

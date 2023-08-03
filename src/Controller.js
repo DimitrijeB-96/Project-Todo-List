@@ -16,10 +16,9 @@ export class Controller {
     this.contentView.bindCreateTodo();
     this.contentView.bindSaveTodoList(this.handleAddTask);
 
+
     this.onProjectListChanged(this.model.projects);
-    this.todos = this.model.projects['todos'];
-    console.log(this.todos);
-    this.onTodoListChanged(this.model.projects.todos);
+    this.onTodoListChanged(this.model.todos);
   }
 
   onProjectListChanged = (projects) => {
@@ -27,8 +26,8 @@ export class Controller {
     //this.model.returnProjects(); // DELETE LATER
   }
 
-  onTodoListChanged = (task) => {
-    this.contentView.displayTodoList(task);
+  onTodoListChanged = (todos) => {
+    this.contentView.displayTodoList(todos);
   }
 
   handleAddProject = (projectTitle) => {
@@ -37,6 +36,7 @@ export class Controller {
 
   handleAddTask = (taskTitle, taskDescription, taskDate, taskImportant) => {
     this.model.addTask(taskTitle, taskDescription, taskDate, taskImportant);
+    this.contentView.displayTodoList(this.model.getActiveProjectTasks());
   }
 
   handleDeleteProject = (id) => {
@@ -53,8 +53,18 @@ export class Controller {
     
     if (this.model.isActivePageProject(id)) {
       this.contentView.showAddTaskBtn();
+      this.contentView.displayTodoList(this.model.getActiveProjectTasks());
     } else {
       this.contentView.hideAddTaskBtn();
+      if (id === 1) {
+        this.contentView.displayTodoList(this.model.getAllTasks());
+      } else if (id === 2) {
+        this.contentView.displayTodoList(this.model.getTodaysTasks());
+      } else if (id === 3) {
+        this.contentView.displayTodoList(this.model.getUpcomingTasks());
+      } else if (id === 4) {
+        this.contentView.displayTodoList(this.model.getImportantTasks());
+      }
     }
     
     this.handleChangeTitle();

@@ -145,10 +145,16 @@ export class ContentView {
       const descriptionInput = this.getElement('#task-description');
 
       const isImportant = this.getElement('#task-important');
+      //let isImportantValue;
 
       if (e.target.className === 'create-todo-btn') {
         if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {
-          handler(titleInput.value, descriptionInput.value, dateInput.value, isImportant.value);
+          if (isImportant.checked) {
+            isImportant.status = 'checked';
+          } else {
+            isImportant.status = 'unchecked';
+          }
+          handler(titleInput.value, descriptionInput.value, dateInput.value, isImportant.status);
           this._hideTodoCreatingDiv();
         }
       }
@@ -176,10 +182,11 @@ export class ContentView {
   }
 
   displayTodoList(todos) {
-    while(this.todosList.firstChild) {
-      this.todosList.remove(this.todosList.firstChild);
+    while (this.todosList.firstChild) {
+      this.todosList.removeChild(this.todosList.firstChild);
     }
 
+    // ONLY SHOW TASKS THAT ARE FOR FROM THAT PROJECT
     if (todos.length !== 0) {
       todos.forEach(todo => {
         const li = this.createElement('li', 'task');
@@ -190,12 +197,16 @@ export class ContentView {
         const taskDescription = this.createElement('p', 'task-description');
         taskDescription.textContent = todo.taskDescription;
 
-        // Maybe this should be presented as paragraph ?
         const taskDate = this.createElement('p', 'task-date');
-        taskDate.type = 'date';
+        taskDate.textContent = todo.taskDate;
 
         const isImportant = this.createElement('input', 'task-important');
         isImportant.type = 'checkbox';
+        if (todo.isTaskImportant === 'checked') {
+          isImportant.checked = true;
+        } else {
+          isImportant.checked = false;
+        }
 
         const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
         deleteTaskBtn.textContent = 'X';
@@ -208,5 +219,9 @@ export class ContentView {
         this.todosList.append(li);
       })
     }
+  }
+
+  displayCurrentTasks() {
+
   }
 }

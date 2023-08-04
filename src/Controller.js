@@ -15,6 +15,7 @@ export class Controller {
     this.contentView.setTitle(this.handleChangeTitle);
     this.contentView.bindCreateTodo();
     this.contentView.bindSaveTodoList(this.handleAddTask);
+    this.contentView.bindDeleteTask(this.handleDeleteTask);
 
     this.onProjectListChanged(this.model.projects);
     this.onTodoListChanged(this.model.todos);
@@ -36,6 +37,7 @@ export class Controller {
   handleAddTask = (taskTitle, taskDescription, taskDate, taskImportant) => {
     this.model.addTask(taskTitle, taskDescription, taskDate, taskImportant);
     this.contentView.displayTodoList(this.model.getActiveProjectTasks());
+    console.log(this.model.todos);
   }
 
   handleDeleteProject = (id) => {
@@ -45,6 +47,7 @@ export class Controller {
 
   handleDeleteTask = (id) => {
     this.model.deleteTask(id);
+    console.log(this.model.todos);
   }
 
   handleActivePage = (id) => {

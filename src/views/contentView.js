@@ -189,6 +189,7 @@ export class ContentView {
     if (todos.length !== 0) {
       todos.forEach(todo => {
         const li = this.createElement('li', 'task');
+        li.id = todo.id;
 
         const taskName = this.createElement('h3', 'task-name');
         taskName.textContent = todo.taskName;
@@ -220,7 +221,12 @@ export class ContentView {
     }
   }
 
-  displayCurrentTasks() {
-
+  bindDeleteTask(handler) {
+    this.todosList.addEventListener('click', (e) => {
+      if (e.target.className === "delete-task-btn") {
+        const id = parseInt(e.target.parentElement.id);
+        handler(id);
+      }
+    });
   }
 }

@@ -39,7 +39,7 @@ export class Model {
     }
 
     const todo = {
-      id: this.todos > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       taskName: name,
       taskDescription: description,
       taskDate: date,
@@ -89,11 +89,10 @@ export class Model {
     this.onProjectListChanged(this.projects);
   }
 
-  // DIFFERENT THEN THIS
   deleteTask(id) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
 
-    // ADJUST HERE
+    this.onTodoListChanged(this.todos);
   }
 
   deleteAllProjectTasks() {
@@ -101,7 +100,7 @@ export class Model {
 
     this.todos = this.todos.filter((todo) => !findTodosFromDeletedProject.some((foundTodo) => foundTodo.id === todo.id));
 
-    return this.todos;
+    this.onTodoListChanged(this.todos);
   }
 
   changeActivePage(id) {
@@ -198,6 +197,10 @@ export class Model {
     }
 
     return onlyImportantTasks;
+  }
+
+  editTasks() {
+    // Implement when change isImportant to affect that task in Important defaultProjects
   }
 
   bindProjectListChanged(callback) {

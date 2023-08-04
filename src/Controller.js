@@ -16,7 +16,6 @@ export class Controller {
     this.contentView.bindCreateTodo();
     this.contentView.bindSaveTodoList(this.handleAddTask);
 
-
     this.onProjectListChanged(this.model.projects);
     this.onTodoListChanged(this.model.todos);
   }
@@ -50,7 +49,7 @@ export class Controller {
 
   handleActivePage = (id) => {
     this.model.changeActivePage(id);
-    
+
     if (this.model.isActivePageProject(id)) {
       this.contentView.showAddTaskBtn();
       this.contentView.displayTodoList(this.model.getActiveProjectTasks());

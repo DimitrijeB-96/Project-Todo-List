@@ -513,7 +513,7 @@ li {
 
 .task {
   display: grid;
-  grid-template-columns: 1fr 4fr 6fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 5fr 2fr 1fr 1fr;
 
   align-items: center;
   border-bottom: 2px solid var(--slate100);

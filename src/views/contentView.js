@@ -145,7 +145,6 @@ export class ContentView {
       const descriptionInput = this.getElement('#task-description');
 
       const isImportant = this.getElement('#task-important');
-      //let isImportantValue;
 
       if (e.target.className === 'create-todo-btn') {
         if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {

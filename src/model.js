@@ -1,3 +1,5 @@
+import { format, parseISO, isToday, isFuture } from 'date-fns';
+
 export class Model {
   constructor() {
     this.defaultProjects = [
@@ -79,17 +81,27 @@ export class Model {
 
   deleteProject(id) {
     this.projects = this.projects.filter((project) => project.id !== id);
-    
+
+    this.deleteAllProjectTasks();
     this.updateAllProjects();
     this.menuPageIsActivePage();
 
     this.onProjectListChanged(this.projects);
   }
 
+  // DIFFERENT THEN THIS
   deleteTask(id) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
 
     // ADJUST HERE
+  }
+
+  deleteAllProjectTasks() {
+    let findTodosFromDeletedProject = this.todos.filter((todo) => !this.projects.find((project) => todo.whichProjectHoldThisTask === project.title));
+
+    this.todos = this.todos.filter((todo) => !findTodosFromDeletedProject.some((foundTodo) => foundTodo.id === todo.id));
+
+    return this.todos;
   }
 
   changeActivePage(id) {
@@ -147,16 +159,33 @@ export class Model {
   }
 
   getAllTasks() {
-    // Implement logic to show all todos
     return this.todos;
   }
 
   getTodaysTasks() {
-    // Implement logic to show only todos where todays date is the same as task date
+    let todaysTasks = []; 
+
+    for (let i = 0; i < this.todos.length; i++) {
+      // Date has to be converted from string into ISO
+      if (isToday(parseISO(this.todos[i].taskDate))) {
+        todaysTasks.push(this.todos[i]);
+      }
+    }
+
+    return todaysTasks;
   }
 
   getUpcomingTasks() {
-    // Implement logic to show only todos where task date is "greater" then todays date
+    let futureTasks = [];
+
+    for (let i = 0; i < this.todos.length; i++) {
+
+      if (isFuture(parseISO(this.todos[i].taskDate))) {
+        futureTasks.push(this.todos[i]);
+      }
+    }
+
+    return futureTasks;
   }
 
   getImportantTasks() {

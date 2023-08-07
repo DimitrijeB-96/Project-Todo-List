@@ -462,6 +462,7 @@ li {
   height: 30px;
   margin-top: -3px;
 
+  border: 2px solid var(--slate100);
   box-shadow: 0 0 10px -2px var(--slate500);
   border-radius: 6px;
 

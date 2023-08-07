@@ -210,6 +210,7 @@ export class ContentView {
 
         const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
         deleteTaskBtn.textContent = 'X';
+        deleteTaskBtn.type = 'button';
 
         const isTaskCompleted = this.createElement('input', 'task-completed');
         isTaskCompleted.type = 'checkbox';

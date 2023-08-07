@@ -14,6 +14,10 @@ export class Model {
     this.projects = [];
 
     this.allProjects = this.defaultProjects;
+
+    this.todayTodos = [];
+    this.upcomingTodos = [];
+    this.importantTodos = [];
   }
 
   addProject(projectTitle) {
@@ -158,49 +162,52 @@ export class Model {
   }
 
   getAllTasks() {
+    this.onTodoListChanged(this.todos);
     return this.todos;
   }
 
   getTodaysTasks() {
-    let todaysTasks = []; 
+    this.todayTodos = [];
 
     for (let i = 0; i < this.todos.length; i++) {
       // Date has to be converted from string into ISO
       if (isToday(parseISO(this.todos[i].taskDate))) {
-        todaysTasks.push(this.todos[i]);
+        this.todayTodos.push(this.todos[i]);
       }
     }
 
-    return todaysTasks;
+    this.onTodoListChanged(this.todos);
+    return this.todayTodos;
   }
 
   getUpcomingTasks() {
-    let futureTasks = [];
+    this.upcomingTodos = [];
 
     for (let i = 0; i < this.todos.length; i++) {
-
       if (isFuture(parseISO(this.todos[i].taskDate))) {
-        futureTasks.push(this.todos[i]);
+        this.upcomingTodos.push(this.todos[i]);
       }
     }
 
-    return futureTasks;
+    this.onTodoListChanged(this.todos);
+    return this.upcomingTodos;
   }
 
   getImportantTasks() {
-    let onlyImportantTasks = [];
+    this.importantTodos = [];
 
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i].isTaskImportant === 'checked') {
-        onlyImportantTasks.push(this.todos[i]);
+        this.importantTodos.push(this.todos[i]);
       }
     }
 
-    return onlyImportantTasks;
+    this.onTodoListChanged(this.todos);
+    return this.importantTodos;
   }
 
   editTasks() {
-    // Implement when change isImportant to affect that task in Important defaultProjects
+    // Implement when change isImportant to affect that task in Important defaultProjects and checkbox for completed task to get it completed 
   }
 
   bindProjectListChanged(callback) {

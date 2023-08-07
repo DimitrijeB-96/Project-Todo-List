@@ -18,7 +18,7 @@ export class Controller {
     this.contentView.bindDeleteTask(this.handleDeleteTask);
 
     this.onProjectListChanged(this.model.projects);
-    this.onTodoListChanged(this.model.todos);
+    this.onTodoListChanged(this.model.todos); // PROBLEM HERE ???
   }
 
   onProjectListChanged = (projects) => {
@@ -26,6 +26,7 @@ export class Controller {
     //this.model.returnProjects(); // DELETE LATER
   }
 
+  // THIS IS WHERE THE PROBLEM IS, I HAVE TO FIND THE WAY TO MAKE SURE THAT CONTENT WILL RENDER ONLY SPECIFIC ARRAY AND NOT ALL TODOS
   onTodoListChanged = (todos) => {
     this.contentView.displayTodoList(todos);
   }
@@ -47,7 +48,27 @@ export class Controller {
 
   handleDeleteTask = (id) => {
     this.model.deleteTask(id);
-    console.log(this.model.todos);
+
+    if (this.model.getActivePageTitle() === 'All') {
+      console.log("ALL");
+      this.contentView.displayTodoList(this.model.todos);
+    } else if (this.model.getActivePageTitle() === 'Today') {
+      console.log("TODAY");
+      this.model.getTodaysTasks();
+      this.contentView.displayTodoList(this.model.todayTodos);
+    } else if (this.model.getActivePageTitle() === 'Upcoming') {
+      console.log("UPCOMING");
+      this.model.getUpcomingTasks();
+      this.contentView.displayTodoList(this.model.upcomingTodos);
+    } else if (this.model.getActivePageTitle() === 'Important') {
+      console.log("IMPORTANT");
+      this.model.getImportantTasks();
+      this.contentView.displayTodoList(this.model.importantTodos);
+    } else {
+      console.log("INSIDE PROJECTS!");
+      this.contentView.displayTodoList(this.model.getActiveProjectTasks());
+    }
+    console.log(this.model.todos); // DELETE LATER
   }
 
   handleActivePage = (id) => {
@@ -59,13 +80,16 @@ export class Controller {
     } else {
       this.contentView.hideAddTaskBtn();
       if (id === 1) {
-        this.contentView.displayTodoList(this.model.getAllTasks());
+        this.contentView.displayTodoList(this.model.todos);
       } else if (id === 2) {
-        this.contentView.displayTodoList(this.model.getTodaysTasks());
+        this.model.getTodaysTasks();
+        this.contentView.displayTodoList(this.model.todayTodos);
       } else if (id === 3) {
-        this.contentView.displayTodoList(this.model.getUpcomingTasks());
+        this.model.getUpcomingTasks();
+        this.contentView.displayTodoList(this.model.upcomingTodos);
       } else if (id === 4) {
-        this.contentView.displayTodoList(this.model.getImportantTasks());
+        this.model.getImportantTasks();
+        this.contentView.displayTodoList(this.model.importantTodos);
       }
     }
     

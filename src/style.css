@@ -54,6 +54,10 @@ li {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* NAVIGATION */
 .nav-section {
   grid-area: nav;
@@ -120,7 +124,6 @@ li {
 
   font-size: 1em;
   font-weight: 600;
-  
   
   align-self: center;
   text-align: center;
@@ -492,6 +495,8 @@ li {
   border-radius: 6px;
 
   background-color: var(--slate100);
+
+  cursor: pointer;
 }
 
 .create-todo-form input[type="checkbox"]:focus {
@@ -613,7 +618,6 @@ li {
   font-size: 32px;
   line-height: 2.8rem;
   text-align: center;
-  cursor: pointer;
 
   color: var(--slate200);
   background: var(--red500);

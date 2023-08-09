@@ -95,3 +95,5 @@ export class Controller {
     this.contentView.setTitle();
   }
 }
+
+// RE-DESIGN TASK LAYOUT, CREATE STRIKETHROUGH WHEN FIRST CHECK BOX IS CREATED, MAKE NEW CHECBOXES...

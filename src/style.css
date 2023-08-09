@@ -8,6 +8,7 @@
   --slate500: #64748b;
   --slate700: #334155;
   --slate800: #1e293b;
+  --slate900: #0f172a;
 
   --red500: #ef4444;
   --red600: #dc2626;
@@ -242,6 +243,7 @@ li {
 
   align-self: flex-end;
   margin-left: 5.2rem;
+  margin-bottom: 5px;
 }
 
 /* CONTENT */
@@ -264,7 +266,24 @@ li {
   border-radius: 30px;
 }
 
+.content-div-top {
+  width: 100%;
+  height: 50px;
+  margin-top: -5px;
+
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+
+  background: linear-gradient(50deg, var(--emerald400), var(--sky400));
+}
+
 .todos-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 10px;
   width: 100%;
 }
 
@@ -274,7 +293,7 @@ li {
   bottom: 0;
 
   margin-right: 4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 
   width: 60px;
   height: 60px;
@@ -354,10 +373,13 @@ li {
   margin-top: 10px;
   margin-left: auto;
 
+  padding: 0;
+  line-height: 2.3rem;
+
   width: 35px;
   height: 35px;
 
-  font-size: 1.1em;
+  font-size: 1.4em;
   font-weight: 700;
   
   border: none;
@@ -513,27 +535,64 @@ li {
 }
 
 .task {
-  display: grid;
-  grid-template-columns: 1fr 4fr 5fr 2fr 1fr 1fr;
+  display: flex;
+  gap: 10px;
 
   align-items: center;
-  border-bottom: 2px solid var(--slate100);
 
-  width: 100%;
-  height: 60px;
+  width: 98%;
+  height: 80px;
+
+  background: var(--slate500);
+  border-radius: 10px;
+  box-shadow: 2px 4px 12px -2px var(--slate900);
 }
 
-.task:first-of-type {
-  margin-top: 24px;
+.task:hover {
+  background: var(--slate400);
+  box-shadow: none;
 }
 
-.task h3,
-.task p {
-  color: var(--slate100);
+.task-completed {
+  width: 100px;
+}
+
+.task-title-description-div {
+  width: 550px;
+}
+
+.task-date {
+  width: 100px;
+}
+
+.task-important {
+  width: 80px;
+}
+
+.delete-task-btn {
+  width: 45px;
+  height: 45px;
+
+  font-size: 32px;
+  line-height: 2.8rem;
+  text-align: center;
+
+  color: var(--slate200);
+  background: var(--red500);
+
+  border: none;
+  border-radius: 8px;
+  box-shadow: 2px 2px 7px -1px var(--slate800);
+}
+
+.delete-task-btn:hover {
+  background: var(--red600);
+  box-shadow: none;
 }
 
 .task h3 {
-  font-size: 1.5em;
+  font-size: 1.8em;
+  color: var(--slate100);
 }
 
 .task p {

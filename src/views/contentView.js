@@ -8,6 +8,8 @@ export class ContentView {
 
     this.contentDiv = this.createElement('div', 'content-div');
 
+    this.contentDivTop = this.createElement('div', 'content-div-top');
+
     this.todosList = this.createElement('ul', 'todos-list');
 
     //THIS SHOULD BE DISPLAYED ONLY WHEN PROJECT IS ACTIVE
@@ -17,7 +19,7 @@ export class ContentView {
 
     this.header.append(this.currentPage);
 
-    this.contentDiv.append(this.todosList, this.addNewTodoBtn);
+    this.contentDiv.append(this.contentDivTop, this.todosList, this.addNewTodoBtn);
 
     this.content.append(this.contentDiv);
 
@@ -80,7 +82,7 @@ export class ContentView {
       title.textContent = 'Create Task';
 
       const closeBtn = this.createElement('button', 'close-todo-create-btn');
-      closeBtn.textContent = 'X';
+      closeBtn.textContent = '❌';
 
       const form = this.createElement('form', 'create-todo-form');
 
@@ -191,6 +193,8 @@ export class ContentView {
         const li = this.createElement('li', 'task');
         li.id = todo.id;
 
+        const taskTitleAndDescriptionDiv = this.createElement('div', 'task-title-description-div');
+
         const taskName = this.createElement('h3', 'task-name');
         taskName.textContent = todo.taskName;
 
@@ -209,13 +213,14 @@ export class ContentView {
         }
 
         const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
-        deleteTaskBtn.textContent = 'X';
+        deleteTaskBtn.textContent = '❌';
         deleteTaskBtn.type = 'button';
 
         const isTaskCompleted = this.createElement('input', 'task-completed');
         isTaskCompleted.type = 'checkbox';
 
-        li.append(isTaskCompleted, taskName, taskDescription, taskDate, isImportant, deleteTaskBtn);
+        taskTitleAndDescriptionDiv.append(taskName, taskDescription);
+        li.append(isTaskCompleted, taskTitleAndDescriptionDiv, taskDate, isImportant, deleteTaskBtn);
 
         this.todosList.append(li);
       })

@@ -1,4 +1,4 @@
-import { format, parseISO, isToday, isFuture } from 'date-fns';
+import { parseISO, isToday, isFuture } from 'date-fns';
 
 export class Model {
   constructor() {
@@ -9,7 +9,10 @@ export class Model {
       { id: 4, title: 'Important', isActive: false }
     ];
 
-    this.todos = [];
+    this.todos = [
+      { id: 1, taskName: 'First today task', taskDescription: 'Be happy today :)', taskDate: '2023-08-07', isTaskCompleted: false, isTaskImportant: 'checked', whichProjectHoldThisTask: 'todayTodos'},
+      { id: 2, taskName: 'First tomorrow task', taskDescription: 'Be happy tomorrow :)', taskDate: '2023-08-08', isTaskCompleted: false, isTaskImportant: 'unchecked', whichProjectHoldThisTask: 'todayTodos'}
+    ];
 
     this.projects = [];
 

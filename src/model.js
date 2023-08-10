@@ -119,7 +119,7 @@ export class Model {
 
   changeTaskComplete(id) {
     this.todos = this.todos.map((todo) =>
-      todo.id === id ? { id: todo.id, taskDescription: todo.taskDescription, taskDate: todo.taskDate, isTaskCompleted: !todo.isTaskCompleted, isTaskImportant: todo.isTaskCompleted, whichProjectHoldThisTask: todo.whichProjectHoldThisTask} : todo,
+      todo.id === id ? { id: todo.id, taskName: todo.taskName, taskDescription: todo.taskDescription, taskDate: todo.taskDate, isTaskCompleted: !todo.isTaskCompleted, isTaskImportant: todo.isTaskImportant, whichProjectHoldThisTask: todo.whichProjectHoldThisTask} : todo,
     );
 
     this._commitTodos(this.todos);
@@ -127,7 +127,7 @@ export class Model {
 
   changeTaskImportant(id) {
     this.todos = this.todos.map((todo) =>
-      todo.id === id ? { id: todo.id, taskDescription: todo.taskDescription, taskDate: todo.taskDate, isTaskCompleted: todo.isTaskCompleted, isTaskImportant: !todo.isTaskCompleted, whichProjectHoldThisTask: todo.whichProjectHoldThisTask} : todo,
+      todo.id === id ? { id: todo.id, taskName: todo.taskName, taskDescription: todo.taskDescription, taskDate: todo.taskDate, isTaskCompleted: todo.isTaskCompleted, isTaskImportant: !todo.isTaskImportant, whichProjectHoldThisTask: todo.whichProjectHoldThisTask} : todo,
     );
 
     this._commitTodos(this.todos);

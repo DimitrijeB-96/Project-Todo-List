@@ -151,11 +151,11 @@ export class ContentView {
       if (e.target.className === 'create-todo-btn') {
         if (titleInput.value !== '' && dateInput.value !== '' && descriptionInput.value !== '') {
           if (isImportant.checked) {
-            isImportant.status = 'checked';
+            isImportant.checked = true;
           } else {
-            isImportant.status = 'unchecked';
+            isImportant.checked = false;
           }
-          handler(titleInput.value, descriptionInput.value, dateInput.value, isImportant.status);
+          handler(titleInput.value, descriptionInput.value, dateInput.value, isImportant.checked);
           this._hideTodoCreatingDiv();
         }
       }
@@ -194,19 +194,19 @@ export class ContentView {
         li.id = todo.id;
 
         const taskTitleAndDescriptionDiv = this.createElement('div', 'task-title-description-div');
+        const strikeName = this.createElement('s');
+        const strikeDescription = this.createElement('s');
 
         const taskName = this.createElement('h3', 'task-name');
-        taskName.textContent = todo.taskName;
 
         const taskDescription = this.createElement('p', 'task-description');
-        taskDescription.textContent = todo.taskDescription;
 
         const taskDate = this.createElement('p', 'task-date');
         taskDate.textContent = todo.taskDate;
 
         const isImportant = this.createElement('input', 'task-important');
         isImportant.type = 'checkbox';
-        if (todo.isTaskImportant === 'checked') {
+        if (todo.isTaskImportant === true) {
           isImportant.checked = true;
         } else {
           isImportant.checked = false;
@@ -218,6 +218,20 @@ export class ContentView {
 
         const isTaskCompleted = this.createElement('input', 'task-completed');
         isTaskCompleted.type = 'checkbox';
+        if (todo.isTaskCompleted === false) {
+          isTaskCompleted.checked = false;
+
+          taskName.textContent = todo.taskName;
+          taskDescription.textContent = todo.taskDescription;
+        } else {
+          isTaskCompleted.checked = true;
+
+          strikeName.textContent = todo.taskName;
+          strikeDescription.textContent = todo.taskDescription;
+
+          taskName.append(strikeName);
+          taskDescription.append(strikeDescription);
+        }
 
         taskTitleAndDescriptionDiv.append(taskName, taskDescription);
         li.append(isTaskCompleted, taskTitleAndDescriptionDiv, taskDate, isImportant, deleteTaskBtn);
@@ -225,10 +239,6 @@ export class ContentView {
         this.todosList.append(li);
       })
     }
-  }
-
-  changeTaskCompleted() {
-
   }
 
   bindDeleteTask(handler) {

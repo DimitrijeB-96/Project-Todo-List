@@ -25,7 +25,6 @@ export class Controller {
 
   onProjectListChanged = (projects) => {
     this.navView.displayProjects(projects);
-    //this.model.returnProjects(); // DELETE LATER
   }
 
   onTodoListChanged = (todos) => {
@@ -39,7 +38,6 @@ export class Controller {
   handleAddTask = (taskTitle, taskDescription, taskDate, taskImportant) => {
     this.model.addTask(taskTitle, taskDescription, taskDate, taskImportant);
     this.contentView.displayTodoList(this.model.getActiveProjectTasks());
-    console.log(this.model.todos);
   }
 
   handleDeleteProject = (id) => {
@@ -68,12 +66,10 @@ export class Controller {
 
   handleEditImportant = (id) => {
     this.model.changeTaskImportant(id);
-    console.log(this.model.todos);
   }
 
   handleEditCompleted = (id) => {
     this.model.changeTaskComplete(id);
-    //console.log(this.model.todos);
   }
 
   handleActivePage = (id) => {
@@ -99,7 +95,6 @@ export class Controller {
     }
     
     this.handleChangeTitle();
-    //this.model.returnProjects(); // DELETE LATER
   }
 
   handleChangeTitle = () => {

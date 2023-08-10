@@ -67,13 +67,6 @@ export class Model {
     this._commitTodos(this.todos);
   }
 
-  returnProjects() { // DELETE LATER
-    console.log('Projects: ');
-    console.log(this.projects);
-    console.log('All Projects: ');
-    console.log(this.allProjects); 
-  }
-
   updateAllProjects() {
     this.allProjects = [...this.defaultProjects, ...this.projects];
   }

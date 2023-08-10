@@ -16,6 +16,8 @@ export class Controller {
     this.contentView.bindCreateTodo();
     this.contentView.bindSaveTodoList(this.handleAddTask);
     this.contentView.bindDeleteTask(this.handleDeleteTask);
+    this.contentView.bindEditImportantTask(this.handleEditImportant);
+    this.contentView.bindEditCompletedTask(this.handleEditCompleted);
 
     this.onProjectListChanged(this.model.projects);
     this.onTodoListChanged(this.model.todos);
@@ -64,6 +66,16 @@ export class Controller {
     }
   }
 
+  handleEditImportant = (id) => {
+    this.model.changeTaskImportant(id);
+    console.log(this.model.todos);
+  }
+
+  handleEditCompleted = (id) => {
+    this.model.changeTaskComplete(id);
+    //console.log(this.model.todos);
+  }
+
   handleActivePage = (id) => {
     this.model.changeActivePage(id);
 
@@ -95,5 +107,3 @@ export class Controller {
     this.contentView.setTitle();
   }
 }
-
-// RE-DESIGN TASK LAYOUT, CREATE STRIKETHROUGH WHEN FIRST CHECK BOX IS CREATED, MAKE NEW CHECBOXES...

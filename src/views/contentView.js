@@ -227,9 +227,31 @@ export class ContentView {
     }
   }
 
+  changeTaskCompleted() {
+
+  }
+
   bindDeleteTask(handler) {
     this.todosList.addEventListener('click', (e) => {
       if (e.target.className === "delete-task-btn") {
+        const id = parseInt(e.target.parentElement.id);
+        handler(id);
+      }
+    });
+  }
+
+  bindEditImportantTask(handler) {
+    this.todosList.addEventListener('click', (e) => {
+      if (e.target.className === "task-important") {
+        const id = parseInt(e.target.parentElement.id);
+        handler(id);
+      }
+    });
+  }
+
+  bindEditCompletedTask(handler) {
+    this.todosList.addEventListener('click', (e) => {
+      if (e.target.className === 'task-completed') {
         const id = parseInt(e.target.parentElement.id);
         handler(id);
       }

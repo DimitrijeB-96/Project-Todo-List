@@ -9,18 +9,25 @@ export class Model {
       { id: 4, title: 'Important', isActive: false }
     ];
 
-    this.todos = [
-      { id: 1, taskName: 'First today task', taskDescription: 'Be happy today :)', taskDate: '2023-08-07', isTaskCompleted: false, isTaskImportant: 'checked', whichProjectHoldThisTask: 'todayTodos'},
-      { id: 2, taskName: 'First tomorrow task', taskDescription: 'Be happy tomorrow :)', taskDate: '2023-08-08', isTaskCompleted: false, isTaskImportant: 'unchecked', whichProjectHoldThisTask: 'todayTodos'}
-    ];
+    this.todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-    this.projects = [];
+    this.projects = JSON.parse(localStorage.getItem('projects')) || [];
 
     this.allProjects = this.defaultProjects;
 
     this.todayTodos = [];
     this.upcomingTodos = [];
     this.importantTodos = [];
+  }
+
+  _commitProjects(projects) {
+    this.onProjectListChanged(projects);
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
+  _commitTodos(todos) {
+    this.onTodoListChanged(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
   }
 
   addProject(projectTitle) {
@@ -33,7 +40,7 @@ export class Model {
     this.projects.push(project);
     this.updateAllProjects();
 
-    this.onProjectListChanged(this.projects);
+    this._commitProjects(this.projects);
   }
 
   addTask(name, description, date, isImportant) {
@@ -57,7 +64,7 @@ export class Model {
 
     this.todos.push(todo);
 
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
   }
 
   returnProjects() { // DELETE LATER
@@ -93,13 +100,13 @@ export class Model {
     this.updateAllProjects();
     this.menuPageIsActivePage();
 
-    this.onProjectListChanged(this.projects);
+    this._commitProjects(this.projects);
   }
 
   deleteTask(id) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
 
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
   }
 
   deleteAllProjectTasks() {
@@ -107,7 +114,23 @@ export class Model {
 
     this.todos = this.todos.filter((todo) => !findTodosFromDeletedProject.some((foundTodo) => foundTodo.id === todo.id));
 
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
+  }
+
+  changeTaskComplete(id) {
+    this.todos = this.todos.map((todo) =>
+      todo.id === id ? { id: todo.id, taskDescription: todo.taskDescription, taskDate: todo.taskDate, isTaskCompleted: !todo.isTaskCompleted, isTaskImportant: todo.isTaskCompleted, whichProjectHoldThisTask: todo.whichProjectHoldThisTask} : todo,
+    );
+
+    this._commitTodos(this.todos);
+  }
+
+  changeTaskImportant(id) {
+    this.todos = this.todos.map((todo) =>
+      todo.id === id ? { id: todo.id, taskDescription: todo.taskDescription, taskDate: todo.taskDate, isTaskCompleted: todo.isTaskCompleted, isTaskImportant: !todo.isTaskCompleted, whichProjectHoldThisTask: todo.whichProjectHoldThisTask} : todo,
+    );
+
+    this._commitTodos(this.todos);
   }
 
   changeActivePage(id) {
@@ -165,7 +188,7 @@ export class Model {
   }
 
   getAllTasks() {
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
     return this.todos;
   }
 
@@ -179,7 +202,7 @@ export class Model {
       }
     }
 
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
     return this.todayTodos;
   }
 
@@ -192,7 +215,7 @@ export class Model {
       }
     }
 
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
     return this.upcomingTodos;
   }
 
@@ -205,12 +228,8 @@ export class Model {
       }
     }
 
-    this.onTodoListChanged(this.todos);
+    this._commitTodos(this.todos);
     return this.importantTodos;
-  }
-
-  editTasks() {
-    // Implement when change isImportant to affect that task in Important defaultProjects and checkbox for completed task to get it completed 
   }
 
   bindProjectListChanged(callback) {

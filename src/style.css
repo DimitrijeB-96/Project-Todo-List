@@ -27,6 +27,11 @@
   
   --empty-circle: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="%23f1f5f9" class="bi bi-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/></svg>');
   --checked-circle: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="%23f1f5f9" class="bi bi-check2-circle" viewBox="0 0 16 16"><path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/><path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/></svg>');
+
+  --small-x: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="%23e2e8f0" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>');
+  --big-x: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="%23e2e8f0" class="bi bi-x-lg" viewBox="0 0 16 16"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/></svg>');
+  
+  --checkmark: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="%231e293b" class="bi bi-check2" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>');
 }
 
 * {
@@ -375,6 +380,8 @@ button {
 }
 
 .close-todo-create-btn {
+  position: relative;
+
   align-self: flex-start;
   margin-top: 10px;
   margin-left: auto;
@@ -394,6 +401,15 @@ button {
   color: var(--slate200);
   background: var(--red500);
   box-shadow: 2px 2px 7px -1px var(--slate700);
+}
+
+.close-todo-create-btn::before {
+  position: absolute;
+
+  margin-top: -20px;
+  margin-left: -20px;
+
+  content: var(--small-x);
 }
 
 .close-todo-create-btn:hover {
@@ -488,7 +504,6 @@ button {
 
   width: 30px;
   height: 30px;
-  margin-top: -3px;
 
   border: 2px solid var(--slate100);
   box-shadow: 0 0 10px -2px var(--slate500);
@@ -506,11 +521,10 @@ button {
 
 .create-todo-form input[type="checkbox"]::before {
   position: absolute;
-  content: "✗";
+  content: var(--checkmark);
 
-  font-size: 32px;
-  margin-top: -4px;
-  color: var(--slate700);
+  margin-top: -1px;
+  margin-left: -1px;
 
   visibility: hidden;
 }
@@ -618,6 +632,8 @@ button {
 }
 
 .delete-task-btn {
+  position: relative;
+
   width: 45px;
   height: 45px;
 
@@ -631,6 +647,15 @@ button {
   border: none;
   border-radius: 8px;
   box-shadow: 2px 2px 7px -1px var(--slate800);
+}
+
+.delete-task-btn::before {
+  position: absolute;
+
+  margin-top: -17px;
+  margin-left: -17px; 
+
+  content: var(--big-x);
 }
 
 .delete-task-btn:hover {

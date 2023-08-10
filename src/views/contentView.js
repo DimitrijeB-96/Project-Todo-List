@@ -82,7 +82,6 @@ export class ContentView {
       title.textContent = 'Create Task';
 
       const closeBtn = this.createElement('button', 'close-todo-create-btn');
-      closeBtn.textContent = '❌';
 
       const form = this.createElement('form', 'create-todo-form');
 
@@ -213,7 +212,6 @@ export class ContentView {
         }
 
         const deleteTaskBtn = this.createElement('button', 'delete-task-btn');
-        deleteTaskBtn.textContent = '❌';
         deleteTaskBtn.type = 'button';
 
         const isTaskCompleted = this.createElement('input', 'task-completed');

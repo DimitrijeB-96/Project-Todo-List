@@ -216,7 +216,7 @@ export class Model {
     this.importantTodos = [];
 
     for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].isTaskImportant === 'checked') {
+      if (this.todos[i].isTaskImportant === true) {
         this.importantTodos.push(this.todos[i]);
       }
     }
